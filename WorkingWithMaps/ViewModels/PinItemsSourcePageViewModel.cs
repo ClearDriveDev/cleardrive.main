@@ -28,8 +28,8 @@ public class PinItemsSourcePageViewModel
         return new Pin
         {
             Location = temp,
-            Label = temp.Timestamp.ToString(),
-            Address = temp.Longitude.ToString() + temp.Latitude.ToString(),
+            Label = temp.Timestamp.Date.ToString(),
+            Address = ((int)temp.Longitude).ToString() + ", "+ ((int)temp.Latitude).ToString(),
             Type = PinType.SavedPin
         };
     }

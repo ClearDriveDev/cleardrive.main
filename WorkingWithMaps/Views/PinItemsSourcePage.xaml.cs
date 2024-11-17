@@ -23,7 +23,7 @@ public partial class PinItemsSourcePage : ContentPage
     {
         map.Pins.Add(_pinItemsSourcePageViewModel.AddLocation(e.Location));
         _pinItemsSourcePageViewModel.PinCreatedCount++;
-        map.MoveToRegion(MapSpan.FromCenterAndRadius(e.Location, Distance.FromMiles(50)));
+        map.MoveToRegion(MapSpan.FromCenterAndRadius(e.Location, Distance.FromMiles(10)));
         //_pinItemsSourcePageViewModel.RemoveLocation(e.Location);
 
 
