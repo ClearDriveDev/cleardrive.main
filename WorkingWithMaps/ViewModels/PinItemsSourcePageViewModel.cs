@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using WorkingWithMaps.Models;
+using WorkingWithMaps.Views;
 
 namespace WorkingWithMaps.ViewModels;
 
@@ -22,9 +23,10 @@ public class PinItemsSourcePageViewModel
     {
         _positions = new ObservableCollection<Position>()
         {
-            new Position("New York, USA", "The City That Never Sleeps", new Location(40.67, -73.94)),
-            new Position("Los Angeles, USA", "City of Angels", new Location(34.11, -118.41)),
-            new Position("San Francisco, USA", "Bay City", new Location(37.77, -122.45))
+            new Position(new Location(46.25057064168142, 20.153861045837406)),
+            new Position(new Location(46.24697970247574 ,20.16021251678467)),
+            new Position(new Location(46.249917761129915, 20.164418220520023)),
+            
         };
 
         AddLocationCommand = new Command(AddLocation);
@@ -54,10 +56,10 @@ public class PinItemsSourcePageViewModel
             return;
         }
 
-        double lastLatitude = _positions.Last().Location.Latitude;
+        double lastLatitude = _positions.Last().LocationINPC.Latitude;
         foreach (Position position in Positions)
         {
-            position.Location = new Location(lastLatitude, position.Location.Longitude);
+            position.LocationINPC = new Location(lastLatitude, position.LocationINPC.Longitude);
         }
     }
 
@@ -73,10 +75,7 @@ public class PinItemsSourcePageViewModel
 
     Position NewPosition()
     {
-        _pinCreatedCount++;
-        return new Position(
-            $"Pin {_pinCreatedCount}",
-            $"Desc {_pinCreatedCount}",
-            RandomPosition.Next(new Location(39.8283459, -98.5794797), 8, 19));
+        return null;
+            
     }
 }

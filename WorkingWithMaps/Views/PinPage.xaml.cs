@@ -13,7 +13,7 @@ public partial class PinPage : ContentPage
     {
         Pin boardwalkPin = new Pin
         {
-            Location = new Location(36.9641949, -122.0177232),
+            Location = new Location(46.25057064168142, 20.153861045837406),
             Label = "Boardwalk",
             Address = "Santa Cruz",
             Type = PinType.Place
@@ -22,7 +22,7 @@ public partial class PinPage : ContentPage
         
         Pin wharfPin = new Pin
         {
-            Location = new Location(36.9571571, -122.0173544),
+            Location = new Location(46.25057064168142, 20.153861045837406),
             Label = "Wharf",
             Address = "Santa Cruz",
             Type = PinType.Place

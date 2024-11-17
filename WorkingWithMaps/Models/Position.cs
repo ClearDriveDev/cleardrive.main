@@ -6,15 +6,12 @@ namespace WorkingWithMaps.Models
     {
         Location _location;
 
-        public string Address { get; }
-        public string Description { get; }
-
-        public Location Location
+        public Location LocationINPC
         {
             get => _location;
             set
             {
-                if (Location == null || !_location.Equals(value))
+                if (LocationINPC == null || !_location.Equals(value))
                 {
                     _location = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Location)));
@@ -22,17 +19,12 @@ namespace WorkingWithMaps.Models
             }
         }
 
-        public Position(string address, string description, Location location)
-        {
-            Address = address;
-            Description = description;
-            Location = location;
+        public Position(Location location)
+        { 
+            LocationINPC = location;
         }
-
-        #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        #endregion
     }
 }

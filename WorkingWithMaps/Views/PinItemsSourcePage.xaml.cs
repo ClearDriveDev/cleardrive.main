@@ -10,11 +10,14 @@ public partial class PinItemsSourcePage : ContentPage
     {
         InitializeComponent();
         BindingContext = new PinItemsSourcePageViewModel();
-        map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(39.8283459, -98.5794797), Distance.FromMiles(1500)));
+        map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(46.25057064168142, 20.153861045837406), Distance.FromMiles(1500)));
     }
+
+    public Location currentLocation { get;  set; }
 
     void OnMapClicked(object sender, MapClickedEventArgs e)
     {
-        System.Diagnostics.Debug.WriteLine($"MapClick: {e.Location.Latitude}, {e.Location.Longitude}");
+        currentLocation = e.Location;
+        
     }
 }
