@@ -19,8 +19,8 @@ public partial class PinItemsSourcePage : ContentPage
     private void OnMapClicked(object sender, MapClickedEventArgs e)
     {
         map.Pins.Add(_pinItemsSourcePageViewModel.AddLocation(e.Location));
-        //map.MoveToRegion(MapSpan.FromCenterAndRadius(e.Location, Distance.FromMiles(10)));
-        _pinItemsSourcePageViewModel.RemoveLocation(e.Location);
+        map.MoveToRegion(MapSpan.FromCenterAndRadius(e.Location, Distance.FromMiles(10)));
+        //_pinItemsSourcePageViewModel.RemoveLocation(e.Location);
 
 
     }

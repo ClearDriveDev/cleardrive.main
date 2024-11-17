@@ -15,10 +15,6 @@
                           Detail="Display a map with other properties set."
                           Command="{Binding NavigateCommand}"
                           CommandParameter="{x:Type views:MapPropertiesPage}" />
-                <TextCell Text="Pins"
-                          Detail="Add a pin to a map."
-                          Command="{Binding NavigateCommand}"
-                          CommandParameter="{x:Type views:PinPage}" />
                 <TextCell Text="Pins with data binding"
                           Detail="Adds a pin collection to a map."
                           Command="{Binding NavigateCommand}"

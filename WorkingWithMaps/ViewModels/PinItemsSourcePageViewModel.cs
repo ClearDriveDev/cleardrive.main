@@ -12,27 +12,33 @@ public class PinItemsSourcePageViewModel
 {
     int _pinCreatedCount = 0;
 
-    private List<Location> _locations;
-    private List<Pin> _pins;
+    private List<Position> _locations;
 
     public PinItemsSourcePageViewModel()
     {
-        _locations = new List<Location>(){ };
+        _locations = new List<Position>(){ };
     }
 
     public Pin AddLocation(Location temp)
     {
-        _locations.Add(temp);
+        _locations.Add(LocationToPositionConverter(temp));
         return new Pin
         {
             Location = temp,
             Label = temp.Timestamp.ToString(),
             Address = temp.Longitude.ToString() + temp.Latitude.ToString(),
-            Type = PinType.Place
+            Type = PinType.SavedPin
         };
     }
 
-    public void RemoveLocation(Location temp)
+    public Position LocationToPositionConverter(Location temp) 
+    {
+        Position _temp_max = new Position(new Location(0,0));
+        _temp_max.LocationINPC = temp;
+       return _temp_max;
+    }
+
+    public void RemoveLocation(Position temp, int id)
     {
         if (_locations.Any())
         {
