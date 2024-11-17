@@ -6,18 +6,22 @@ namespace WorkingWithMaps.Views;
 
 public partial class PinItemsSourcePage : ContentPage
 {
+
+    private PinItemsSourcePageViewModel _pinItemsSourcePageViewModel;
     public PinItemsSourcePage()
     {
         InitializeComponent();
+        _pinItemsSourcePageViewModel = new PinItemsSourcePageViewModel();
         BindingContext = new PinItemsSourcePageViewModel();
-        map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(46.25057064168142, 20.153861045837406), Distance.FromMiles(1500)));
+        map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(0,0), Distance.FromMiles(1500)));
     }
 
-    public Location currentLocation { get;  set; }
-
-    void OnMapClicked(object sender, MapClickedEventArgs e)
+    private void OnMapClicked(object sender, MapClickedEventArgs e)
     {
-        currentLocation = e.Location;
-        
+        map.Pins.Add(_pinItemsSourcePageViewModel.AddLocation(e.Location));
+        //map.MoveToRegion(MapSpan.FromCenterAndRadius(e.Location, Distance.FromMiles(10)));
+        _pinItemsSourcePageViewModel.RemoveLocation(e.Location);
+
+
     }
 }
