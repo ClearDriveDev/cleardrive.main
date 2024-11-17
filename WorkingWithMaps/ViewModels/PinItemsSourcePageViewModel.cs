@@ -5,6 +5,7 @@ using WorkingWithMaps.Models;
 using WorkingWithMaps.Views;
 using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.ApplicationModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace WorkingWithMaps.ViewModels;
 
@@ -18,7 +19,7 @@ public class PinItemsSourcePageViewModel
 
     public PinItemsSourcePageViewModel()
     {
-        _locations = new List<Position>(){ };
+        _locations = new List<Position>();
     }
 
     public Pin AddLocation(Location temp)
@@ -32,7 +33,7 @@ public class PinItemsSourcePageViewModel
             Type = PinType.SavedPin
         };
     }
-
+    
     public Position LocationToPositionConverter(Location temp) 
     {
         Position _temp_max = new Position(new Location(0,0));
