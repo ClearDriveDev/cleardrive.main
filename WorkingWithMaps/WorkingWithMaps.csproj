@@ -76,7 +76,4 @@
 	<ItemGroup>
 	  <None Remove="Templates\" />
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Templates\" />
-	</ItemGroup>
 </Project>
