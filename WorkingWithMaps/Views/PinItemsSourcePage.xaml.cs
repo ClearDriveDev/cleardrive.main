@@ -8,29 +8,6 @@ public partial class PinItemsSourcePage : ContentPage
 {
 
     private PinItemsSourcePageViewModel _pinItemsSourcePageViewModel;
-    private Location currentLocation;
-
-    async Task SetUserLocationOnMapAsync()
-    {
-        try
-        {
-            Location location = await Geolocation.GetLastKnownLocationAsync();
-
-            if (location != null)
-            {
-                map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(location.Latitude, location.Longitude), Distance.FromKilometers(1)));
-            }
-            else
-            {
-                await DisplayAlert("Figyelem!", "Nem tudunk hozzaferni a helyadataihoz, igy alapertelmezetten Szegedre iranyitottuk!", "Ok");
-                map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(46.25336, 20.147209), Distance.FromKilometers(1)));
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Hiba a helyzet lekérdezésekor: {ex.Message}");
-        }
-    }
     public PinItemsSourcePage()
     {
         InitializeComponent();
@@ -38,8 +15,8 @@ public partial class PinItemsSourcePage : ContentPage
         map.IsScrollEnabled = true;
         map.IsZoomEnabled = true;
         _pinItemsSourcePageViewModel = new PinItemsSourcePageViewModel();
-        BindingContext = new PinItemsSourcePageViewModel();
-        SetUserLocationOnMapAsync();
+        BindingContext = _pinItemsSourcePageViewModel;
+        _pinItemsSourcePageViewModel.SetUserLocationOnMapAsync();
     }
 
     public void OnMapClicked(object sender, MapClickedEventArgs e)
@@ -50,7 +27,7 @@ public partial class PinItemsSourcePage : ContentPage
         }
         map.Pins.Add(_pinItemsSourcePageViewModel.CreatePin(e.Location));
         map.MoveToRegion(MapSpan.FromCenterAndRadius(e.Location, Distance.FromMeters(100)));
-        currentLocation = e.Location;
+        _pinItemsSourcePageViewModel = e.Location;
     }
 
     public void AddButton(object sender, EventArgs e)

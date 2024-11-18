@@ -13,10 +13,13 @@ public class PinItemsSourcePageViewModel
 {
 
     private List<Position> _locations;
+    private Location _currentLocation;
+    private Location CurrentLocation { get => _currentLocation; set => _currentLocation = value; }
 
     public PinItemsSourcePageViewModel()
     {
         _locations = new List<Position>();
+        CurrentLocation = new Location();
     }
 
     public void AddLocation(Location temp)
@@ -42,11 +45,33 @@ public class PinItemsSourcePageViewModel
        return _temp_max;
     }
 
-    public void RemoveLocation(Position temp, int id)
+    public void RemoveLocation(Position temp)
     {
         if (_locations.Any())
         {
             _locations.Remove(temp);
+        }
+    }
+
+   public async Task SetUserLocationOnMapAsync()
+    {
+        try
+        {
+            Location location = await Geolocation.GetLastKnownLocationAsync();
+
+            if (location != null)
+            {
+                map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(location.Latitude, location.Longitude), Distance.FromKilometers(1)));
+            }
+            else
+            {
+                await DisplayAlert("Figyelem!", "Nem tudunk hozzaferni a helyadataihoz, igy alapertelmezetten Szegedre iranyitottuk!", "Ok");
+                map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(46.25336, 20.147209), Distance.FromKilometers(1)));
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Hiba a helyzet lekérdezésekor: {ex.Message}");
         }
     }
 }
