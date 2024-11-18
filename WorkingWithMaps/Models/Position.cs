@@ -4,7 +4,7 @@ namespace WorkingWithMaps.Models
 {
     public class Position : INotifyPropertyChanged
     {
-        Location _location;
+       private Location _location;
 
         public Location LocationINPC
         {
@@ -22,6 +22,11 @@ namespace WorkingWithMaps.Models
         public Position(Location location)
         { 
             LocationINPC = location;
+        }
+
+        public Position()
+        {
+            LocationINPC = new Location();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

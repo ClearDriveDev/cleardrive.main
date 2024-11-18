@@ -1,16 +1,24 @@
 ﻿using WorkingWithMaps.Models;
 using Microsoft.Maui.Controls.Maps;
+using WorkingWithMaps.Services;
 
 namespace WorkingWithMaps.ViewModels;
 
 public class PinItemsSourcePageViewModel
 {
-
+    private readonly IClearDriveService? _clearDriveService;
     private List<Position> _locations;
 
     public PinItemsSourcePageViewModel()
     {
         _locations = new List<Position>();
+    }
+
+    public PinItemsSourcePageViewModel(IClearDriveService? clearDriveService)
+    {
+        _locations = new List<Position>();
+        _clearDriveService = clearDriveService;
+        
     }
 
     public void AddLocation(Location temp)
@@ -41,6 +49,15 @@ public class PinItemsSourcePageViewModel
         if (_locations.Any())
         {
             _locations.Remove(temp);
+        }
+    }
+
+    public override async Task InitializeAsync()
+    {
+        if (_clearDriveService is not null)
+        {
+            List<Position> positions = await _clearDriveService.SelectAll();
+            Students = new ObservableCollection<Student>(students);
         }
     }
 }

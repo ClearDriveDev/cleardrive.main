@@ -38,7 +38,7 @@ public partial class PinItemsSourcePage : ContentPage
         map.IsScrollEnabled = true;
         map.IsZoomEnabled = true;
         _pinItemsSourcePageViewModel = new PinItemsSourcePageViewModel();
-        BindingContext = _pinItemsSourcePageViewModel;
+        //BindingContext = _pinItemsSourcePageViewModel;
         SetUserLocationOnMapAsync();
     }
 
