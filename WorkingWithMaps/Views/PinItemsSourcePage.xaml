@@ -20,22 +20,20 @@
                          HorizontalOptions="Center">
                 <StackLayout Orientation="Horizontal"
                              HorizontalOptions="Center"
-                             Spacing="30">  
+                             Spacing="30">
                     <Button Text="Street"
-                        Clicked="OnButtonClicked" />
+                        Clicked="OnViewButtonClicked" />
                     <Button Text="Satellite"
-                        Clicked="OnButtonClicked" />
+                        Clicked="OnViewButtonClicked" />
                 </StackLayout>
-                <Button Text="Add"
-                        Command="{Binding }" />
-                <!--<Button Text="Remove"
-                        Command="{Binding RemoveLocation}" />
-                <Button Text="Clear"
-                        Command="{Binding ClearLocationsCommand}" />
-                <Button Text="Update"
-                        Command="{Binding UpdateLocationsCommand}" />
-                <Button Text="Replace"
-                        Command="{Binding ReplaceLocationCommand}" />-->
+                <StackLayout Orientation="Horizontal"
+             HorizontalOptions="Center"
+             Spacing="30">
+                <Button Text="Send"
+                    Clicked="AddButton" />
+                <Button Text="Remove"
+                        Clicked="RemoveButton" />
+             </StackLayout>
             </StackLayout>
         </ScrollView>
     </Grid>

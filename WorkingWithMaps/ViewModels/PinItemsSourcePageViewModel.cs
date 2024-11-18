@@ -22,14 +22,18 @@ public class PinItemsSourcePageViewModel
         _locations = new List<Position>();
     }
 
-    public Pin AddLocation(Location temp)
+    public void AddLocation(Location temp)
     {
         _locations.Add(LocationToPositionConverter(temp));
+    }
+
+    public Pin CreatePin(Location temp)
+    {
         return new Pin
         {
             Location = temp,
-            Label = temp.Timestamp.Date.ToString(),
-            Address = ((int)temp.Longitude).ToString() + ", "+ ((int)temp.Latitude).ToString(),
+            Label = temp.Timestamp.Year.ToString()+"."+temp.Timestamp.Month.ToString()+"."+temp.Timestamp.Day.ToString()+"  "+ temp.Timestamp.Hour.ToString()+":"+temp.Timestamp.Minute.ToString()+":"+temp.Timestamp.Second.ToString(),
+            Address = ((float)temp.Longitude).ToString() + ", " + ((float)temp.Latitude).ToString(),
             Type = PinType.SavedPin
         };
     }
@@ -47,24 +51,5 @@ public class PinItemsSourcePageViewModel
         {
             _locations.Remove(temp);
         }
-    }
-
-   /*public void UpdateLocations()
-    {
-        if (!_locations.Any())
-        {
-            return;
-        }
-
-        double lastLatitude = _positions.Last().LocationINPC.Latitude;
-        foreach (Position position in Positions)
-        {
-            position.LocationINPC = new Location(lastLatitude, position.LocationINPC.Longitude);
-        }
-    }
-   */
-    void ReplaceLocation()
-    {
-        
     }
 }
