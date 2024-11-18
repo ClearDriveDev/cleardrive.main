@@ -11,9 +11,6 @@ namespace WorkingWithMaps.ViewModels;
 
 public class PinItemsSourcePageViewModel
 {
-    private int _pinCreatedCount = 0;
-
-    public int PinCreatedCount{get => _pinCreatedCount; set {_pinCreatedCount = value;} }
 
     private List<Position> _locations;
 

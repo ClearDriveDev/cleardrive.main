@@ -18,12 +18,12 @@ public partial class PinItemsSourcePage : ContentPage
 
             if (location != null)
             {
-                map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(location.Latitude, location.Longitude), Distance.FromMiles(1)));
+                map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(location.Latitude, location.Longitude), Distance.FromKilometers(1)));
             }
             else
             {
                 await DisplayAlert("Figyelem!", "Nem tudunk hozzaferni a helyadataihoz, igy alapertelmezetten Szegedre iranyitottuk!", "Ok");
-                map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(46.25336, 20.147209), Distance.FromMiles(100)));
+                map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(46.25336, 20.147209), Distance.FromKilometers(1)));
             }
         }
         catch (Exception ex)
@@ -49,7 +49,7 @@ public partial class PinItemsSourcePage : ContentPage
             map.Pins.Clear();
         }
         map.Pins.Add(_pinItemsSourcePageViewModel.CreatePin(e.Location));
-        map.MoveToRegion(MapSpan.FromCenterAndRadius(e.Location, Distance.FromMiles(5)));
+        map.MoveToRegion(MapSpan.FromCenterAndRadius(e.Location, Distance.FromMeters(100)));
         currentLocation = e.Location;
     }
 
@@ -58,15 +58,12 @@ public partial class PinItemsSourcePage : ContentPage
         if (currentLocation != null) 
         {
             _pinItemsSourcePageViewModel.AddLocation(currentLocation);
-            _pinItemsSourcePageViewModel.PinCreatedCount++;
         }
         else
         {
             DisplayAlert("Figyelem!", "Nincs helyzet megadva!", "Ok");
         }
-        
     }
-
 
     public void RemoveButton(object sender, EventArgs e)
     {
