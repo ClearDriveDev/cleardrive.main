@@ -19,7 +19,10 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
+#if IOS
+        builder.UseGoogleMaps("AIzaSyBn_LH5TSBgmEQAJD6wDAy82eWv8zQW5eE");
+#endif
 
-		return builder.Build();
+        return builder.Build();
 	}
 }

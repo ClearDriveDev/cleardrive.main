@@ -7,7 +7,30 @@ namespace WorkingWithMaps.Views;
 public partial class PinItemsSourcePage : ContentPage
 {
 
+    private async Task SetUserLocationOnMapAsync()
+    {
+        try
+        {
+            Location location = await Geolocation.GetLastKnownLocationAsync();
+
+            if (location != null)
+            {
+                map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(location.Latitude, location.Longitude), Distance.FromKilometers(1)));
+            }
+            else
+            {
+                await DisplayAlert("Figyelem!", "Nem tudunk hozzaferni a helyadataihoz, igy alapertelmezetten Szegedre iranyitottuk!", "Ok");
+                map.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(46.25336, 20.147209), Distance.FromKilometers(1)));
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Hiba a helyzet lekérdezésekor: {ex.Message}");
+        }
+    }
+
     private PinItemsSourcePageViewModel _pinItemsSourcePageViewModel;
+    private Location _currentLocation;
     public PinItemsSourcePage()
     {
         InitializeComponent();
@@ -16,10 +39,10 @@ public partial class PinItemsSourcePage : ContentPage
         map.IsZoomEnabled = true;
         _pinItemsSourcePageViewModel = new PinItemsSourcePageViewModel();
         BindingContext = _pinItemsSourcePageViewModel;
-        _pinItemsSourcePageViewModel.SetUserLocationOnMapAsync();
+        SetUserLocationOnMapAsync();
     }
 
-    public void OnMapClicked(object sender, MapClickedEventArgs e)
+    private void OnMapClicked(object sender, MapClickedEventArgs e)
     {
         if (map.Pins.Count > 0) 
         {
@@ -27,14 +50,14 @@ public partial class PinItemsSourcePage : ContentPage
         }
         map.Pins.Add(_pinItemsSourcePageViewModel.CreatePin(e.Location));
         map.MoveToRegion(MapSpan.FromCenterAndRadius(e.Location, Distance.FromMeters(100)));
-        _pinItemsSourcePageViewModel = e.Location;
+        _currentLocation = e.Location;
     }
 
-    public void AddButton(object sender, EventArgs e)
+    private void AddButton(object sender, EventArgs e)
     {
-        if (currentLocation != null) 
+        if (_currentLocation != null) 
         {
-            _pinItemsSourcePageViewModel.AddLocation(currentLocation);
+            _pinItemsSourcePageViewModel.AddLocation(_currentLocation);
         }
         else
         {
@@ -42,23 +65,14 @@ public partial class PinItemsSourcePage : ContentPage
         }
     }
 
-    public void RemoveButton(object sender, EventArgs e)
+    private void RemoveButton(object sender, EventArgs e)
     {
         map.Pins.Clear();
-        currentLocation = null;
+        _currentLocation = null;
     }
 
-    public void OnViewButtonClicked(object sender, EventArgs e)
+    private void OnViewButtonClicked(object sender, EventArgs e)
     {
-        Button button = sender as Button;
-        switch (button.Text)
-        {
-            case "Street":
-                map.MapType = MapType.Street;
-                break;
-            case "Satellite":
-                map.MapType = MapType.Hybrid;
-                break;
-        }
+        map.MapType = (map.MapType == MapType.Street) ? MapType.Hybrid : MapType.Street;
     }
 }
