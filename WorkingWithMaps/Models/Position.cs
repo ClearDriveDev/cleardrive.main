@@ -1,35 +1,30 @@
-﻿using System.ComponentModel;
-
-namespace WorkingWithMaps.Models
+﻿namespace WorkingWithMaps.Models
 {
-    public class Position : INotifyPropertyChanged
+    public class Position
     {
-       private Location _location;
+        public Guid Id { get; set; }
+        public Location Location { get; set; }
+        public bool HasId => Id != Guid.Empty;
 
-        public Location LocationINPC
+
+        /*public Position(Guid id,Location location)
         {
-            get => _location;
-            set
-            {
-                if (LocationINPC == null || !_location.Equals(value))
-                {
-                    _location = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Location)));
-                }
-            }
-        }
+            Id = id;
+            Location = location;
+        }*/
 
         public Position(Location location)
         { 
-            LocationINPC = location;
+            Id = new Guid();
+            Location = location;
         }
 
         public Position()
         {
-            LocationINPC = new Location();
+            Id = Guid.Empty;
+            Location = new Location();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
     }
 }

@@ -1,29 +1,95 @@
 ﻿using WorkingWithMaps.Models;
 using Microsoft.Maui.Controls.Maps;
 using WorkingWithMaps.Services;
+using CommunityToolkit.Mvvm.ComponentModel;
+using WorkingWithMaps.ViewModels.Base;
+using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.Input;
+using System.Threading.Tasks;
 
 namespace WorkingWithMaps.ViewModels;
 
-public class PinItemsSourcePageViewModel
+public partial class PinItemsSourcePageViewModel : BaseViewModel
 {
     private readonly IClearDriveService? _clearDriveService;
-    private List<Position> _locations;
+
+    [ObservableProperty]
+    private ObservableCollection<Position> _locations = new();
+
+    [ObservableProperty]
+    private Position _selectedLocation;
 
     public PinItemsSourcePageViewModel()
     {
-        _locations = new List<Position>();
+        SelectedLocation = new Position();
     }
 
     public PinItemsSourcePageViewModel(IClearDriveService? clearDriveService)
     {
-        _locations = new List<Position>();
+        SelectedLocation = new Position();
         _clearDriveService = clearDriveService;
         
     }
 
-    public void AddLocation(Location temp)
+    [RelayCommand]
+    public async Task DoSave(Position newPosition)
+    {
+        if (_clearDriveService is not null)
+        {
+            string result = "";
+            if (!newPosition.HasId)
+                result = await _clearDriveService.InsertAsync(newPosition);
+
+            if (result.Length == 0)
+            {
+                await UpdateView();
+            }
+        }
+    }
+
+    [RelayCommand]
+    void DoNewStudent()
+    {
+        SelectedLocation = new Position();
+    }
+
+    [RelayCommand]
+    public async Task DoRemove(Position position)
+    {
+        if (_clearDriveService is not null)
+        {
+            string result = await _clearDriveService.DeleteAsync(position.Id);
+            if (result.Length==0)
+            {
+                await UpdateView();
+            }
+        }
+    }
+
+    /*public void AddLocation(Location temp)
     {
         _locations.Add(LocationToPositionConverter(temp));
+    }*/
+
+    /*public Position LocationToPositionConverter(Location temp) 
+    {
+        Position _temp_max = new Position(new Location(0,0));
+        _temp_max.LocationINPC = temp;
+       return _temp_max;
+    }*/
+
+    public override async Task InitializeAsync()
+    {
+        await UpdateView();
+    }
+
+    private async Task UpdateView()
+    {
+        if (_clearDriveService is not null)
+        {
+            List<Position> positions = await _clearDriveService.SelectAll();
+            Locations = new ObservableCollection<Position>(positions);
+        }
     }
 
     public Pin CreatePin(Location temp)
@@ -31,33 +97,17 @@ public class PinItemsSourcePageViewModel
         return new Pin
         {
             Location = temp,
-            Label = temp.Timestamp.Year.ToString()+"."+temp.Timestamp.Month.ToString()+"."+temp.Timestamp.Day.ToString()+"  "+ temp.Timestamp.Hour.ToString()+":"+temp.Timestamp.Minute.ToString()+":"+temp.Timestamp.Second.ToString(),
+            Label = temp.Timestamp.Year.ToString() + "." + temp.Timestamp.Month.ToString() + "." + temp.Timestamp.Day.ToString() + "  " + temp.Timestamp.Hour.ToString() + ":" + temp.Timestamp.Minute.ToString() + ":" + temp.Timestamp.Second.ToString(),
             Address = ((float)temp.Longitude).ToString() + ", " + ((float)temp.Latitude).ToString(),
             Type = PinType.SavedPin
         };
     }
-    
-    public Position LocationToPositionConverter(Location temp) 
-    {
-        Position _temp_max = new Position(new Location(0,0));
-        _temp_max.LocationINPC = temp;
-       return _temp_max;
-    }
 
-    public void RemoveLocation(Position temp)
+    /*public void RemoveLocation(Position temp)
     {
         if (_locations.Any())
         {
             _locations.Remove(temp);
         }
-    }
-
-    public override async Task InitializeAsync()
-    {
-        if (_clearDriveService is not null)
-        {
-            List<Position> positions = await _clearDriveService.SelectAll();
-            Students = new ObservableCollection<Student>(students);
-        }
-    }
+    }*/
 }

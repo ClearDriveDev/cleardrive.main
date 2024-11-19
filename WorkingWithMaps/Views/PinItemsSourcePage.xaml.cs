@@ -53,7 +53,7 @@ public partial class PinItemsSourcePage : ContentPage
         _currentLocation = e.Location;
     }
 
-    private void AddButton(object sender, EventArgs e)
+    /*private void AddButton(object sender, EventArgs e)
     {
         if (_currentLocation != null) 
         {
@@ -69,7 +69,7 @@ public partial class PinItemsSourcePage : ContentPage
     {
         map.Pins.Clear();
         _currentLocation = null;
-    }
+    }*/
 
     private void OnViewButtonClicked(object sender, EventArgs e)
     {

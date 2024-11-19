@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:maps="http://schemas.microsoft.com/dotnet/2021/maui/maps"
+             xmlns:viewmodel="WorkingWithMaps.ViewModels.PinItemsSourcePageViewModel"
              x:Class="WorkingWithMaps.Views.PinItemsSourcePage"
              Title="Fooldal">
     
@@ -27,13 +28,13 @@
              HorizontalOptions="Center"
              Spacing="30">
                 <Button Text="Send"
-                    Clicked="AddButton" />
+                    Command="{Binding DoSave}"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal"
                     HorizontalOptions="Center"
                     Spacing="30">
                         <Button Text="Remove"
-                        Clicked="RemoveButton" />
+                         Command="{Binding DoRemove}"
              </StackLayout>
             </StackLayout>
         </ScrollView>
