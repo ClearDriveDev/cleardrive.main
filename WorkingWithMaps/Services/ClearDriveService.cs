@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using WorkingWithMaps.Models;
 using System.Net;
 using Newtonsoft.Json;
+using WorkingWithMaps.Dtos;
+using WorkingWithMaps.Extensions;
 
 namespace WorkingWithMaps.Services
 {
@@ -22,11 +24,11 @@ namespace WorkingWithMaps.Services
 
             public async Task<List<Position>> SelectAll()
             {
-                if (_httpClient is object)
+                if (_httpClient is not null)
                 {
-                    List<Position>? result = await _httpClient.GetFromJsonAsync<List<Position>>("api/Position");
-                    if (result is object)
-                        return result;
+                    List<PositionDto>? result = await _httpClient.GetFromJsonAsync<List<PositionDto>>("api/Position");
+                    if (result is not null)
+                        return result.Select(positionDto => positionDto.ToPosition()).ToList();
                 }
                 return new List<Position>();
             }
@@ -75,7 +77,7 @@ namespace WorkingWithMaps.Services
                 HttpResponseMessage? httpResponse = null;
                 try
                 {
-                    httpResponse = await _httpClient.PostAsJsonAsync("api/position", position);
+                    httpResponse = await _httpClient.PostAsJsonAsync("api/Position", position.ToPositionDto());
                     if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
                     {
                         string content = await httpResponse.Content.ReadAsStringAsync();

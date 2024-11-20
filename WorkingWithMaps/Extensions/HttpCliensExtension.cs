@@ -12,7 +12,7 @@ namespace WorkingWithMaps.Extensions
         {
             services.AddHttpClient("ClearDriveApi", options =>
             {
-                options.BaseAddress = new Uri("**Eleresi utvonal**");
+                options.BaseAddress = new Uri("https://localhost:7090/");
             });
         }
 

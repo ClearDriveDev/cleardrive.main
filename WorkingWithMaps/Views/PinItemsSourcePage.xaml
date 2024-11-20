@@ -12,8 +12,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <maps:Map x:Name="map"
-                  MapClicked="OnMapClicked">
-        </maps:Map>
+                  MapClicked="OnMapClicked"/>
         <ScrollView Grid.Row="1"
                     Orientation="Horizontal">
             <StackLayout Orientation="Horizontal"
@@ -28,14 +27,14 @@
              HorizontalOptions="Center"
              Spacing="30">
                 <Button Text="Send"
-                    Command="{Binding DoSave}"/>
+                        Clicked="AddButton"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal"
                     HorizontalOptions="Center"
                     Spacing="30">
-                        <Button Text="Remove"
-                         Command="{Binding DoRemove}"
-             </StackLayout>
+                    <Button Text="Remove"
+                     Clicked="RemoveButton"/>
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </Grid>

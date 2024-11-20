@@ -5,6 +5,10 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkingWithMaps", "WorkingWithMaps\WorkingWithMaps.csproj", "{09D2F154-E3FE-4377-B73C-2AA8028444A5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CAS.backend", "..\CAS\CAS.backend\CAS.backend.csproj", "{F5483D1C-6983-4A1F-9DCB-07CA40D825ED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CAS.shared", "..\CAS\CAS.shared\CAS.shared.csproj", "{BE78BA53-9CAF-426C-855A-25FFF680C934}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +21,14 @@ Global
 		{09D2F154-E3FE-4377-B73C-2AA8028444A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09D2F154-E3FE-4377-B73C-2AA8028444A5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{09D2F154-E3FE-4377-B73C-2AA8028444A5}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F5483D1C-6983-4A1F-9DCB-07CA40D825ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5483D1C-6983-4A1F-9DCB-07CA40D825ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5483D1C-6983-4A1F-9DCB-07CA40D825ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5483D1C-6983-4A1F-9DCB-07CA40D825ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE78BA53-9CAF-426C-855A-25FFF680C934}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE78BA53-9CAF-426C-855A-25FFF680C934}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE78BA53-9CAF-426C-855A-25FFF680C934}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE78BA53-9CAF-426C-855A-25FFF680C934}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

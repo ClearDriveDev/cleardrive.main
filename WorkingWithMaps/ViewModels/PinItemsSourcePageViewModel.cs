@@ -6,6 +6,7 @@ using WorkingWithMaps.ViewModels.Base;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Threading.Tasks;
+using WorkingWithMaps.Extensions;
 
 namespace WorkingWithMaps.ViewModels;
 
@@ -47,11 +48,11 @@ public partial class PinItemsSourcePageViewModel : BaseViewModel
         }
     }
 
-    [RelayCommand]
+    /*[RelayCommand]
     void DoNewStudent()
     {
         SelectedLocation = new Position();
-    }
+    }*/
 
     [RelayCommand]
     public async Task DoRemove(Position position)
@@ -83,7 +84,7 @@ public partial class PinItemsSourcePageViewModel : BaseViewModel
         await UpdateView();
     }
 
-    private async Task UpdateView()
+    public async Task UpdateView()
     {
         if (_clearDriveService is not null)
         {

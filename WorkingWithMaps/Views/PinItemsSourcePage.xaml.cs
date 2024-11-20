@@ -1,6 +1,7 @@
 ﻿using WorkingWithMaps.ViewModels;
 using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
+using WorkingWithMaps.Models;
 
 namespace WorkingWithMaps.Views;
 
@@ -38,8 +39,8 @@ public partial class PinItemsSourcePage : ContentPage
         map.IsScrollEnabled = true;
         map.IsZoomEnabled = true;
         _pinItemsSourcePageViewModel = new PinItemsSourcePageViewModel();
-        //BindingContext = _pinItemsSourcePageViewModel;
         SetUserLocationOnMapAsync();
+        _pinItemsSourcePageViewModel.UpdateView();
     }
 
     private void OnMapClicked(object sender, MapClickedEventArgs e)
@@ -53,11 +54,12 @@ public partial class PinItemsSourcePage : ContentPage
         _currentLocation = e.Location;
     }
 
-    /*private void AddButton(object sender, EventArgs e)
+    private async void AddButton(object sender, EventArgs e)
     {
         if (_currentLocation != null) 
         {
-            _pinItemsSourcePageViewModel.AddLocation(_currentLocation);
+            Position temp =  new Position(new Location(_currentLocation.Latitude, _currentLocation.Longitude));
+            await _pinItemsSourcePageViewModel.DoSave(temp);
         }
         else
         {
@@ -69,7 +71,7 @@ public partial class PinItemsSourcePage : ContentPage
     {
         map.Pins.Clear();
         _currentLocation = null;
-    }*/
+    }
 
     private void OnViewButtonClicked(object sender, EventArgs e)
     {
