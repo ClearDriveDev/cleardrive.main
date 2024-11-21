@@ -8,7 +8,6 @@ namespace WorkingWithMaps.Views;
 
 public partial class PinItemsSourcePage : ContentPage
 {
-
     private async Task SetUserLocationOnMapAsync()
     {
         try
@@ -33,20 +32,27 @@ public partial class PinItemsSourcePage : ContentPage
 
     private PinItemsSourcePageViewModel _pinItemsSourcePageViewModel;
     private Location _currentLocation;
-    public PinItemsSourcePage()
+
+    public PinItemsSourcePage(PinItemsSourcePageViewModel viewModel)
     {
         InitializeComponent();
+
+        // BindingContext-et itt rendeljük hozzá
+        BindingContext = viewModel;
+
+        // Az injektált ViewModel példányosítása automatikusan megtörténik
+        _pinItemsSourcePageViewModel = viewModel;
+
         map.IsShowingUser = true;
         map.IsScrollEnabled = true;
         map.IsZoomEnabled = true;
-        _pinItemsSourcePageViewModel = new PinItemsSourcePageViewModel();
+
         SetUserLocationOnMapAsync();
-        _pinItemsSourcePageViewModel.UpdateView();
     }
 
     private void OnMapClicked(object sender, MapClickedEventArgs e)
     {
-        if (map.Pins.Count > 0) 
+        if (map.Pins.Count > 0)
         {
             map.Pins.Clear();
         }
@@ -57,9 +63,9 @@ public partial class PinItemsSourcePage : ContentPage
 
     private async void AddButton(object sender, EventArgs e)
     {
-        if (_currentLocation != null) 
+        if (_currentLocation != null)
         {
-            Position temp =  new Position(new Location(_currentLocation.Latitude, _currentLocation.Longitude));
+            Position temp = new Position(new Location(_currentLocation.Latitude, _currentLocation.Longitude));
             await _pinItemsSourcePageViewModel.DoSave(temp);
             Debug.WriteLine("\nLefutottam0.!\n");
         }

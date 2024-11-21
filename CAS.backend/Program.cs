@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("CASCors", policy =>
     {
-        policy.WithOrigins("http://localhost:7090", "http://10.0.2.2:7090", "http://<your-ip>:7090")
+        policy.WithOrigins("http://0.0.0.0:7090", "http://10.0.2.2:7090")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });

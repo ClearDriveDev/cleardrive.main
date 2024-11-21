@@ -6,43 +6,52 @@ using WorkingWithMaps.Models;
 using System.Net;
 using Newtonsoft.Json;
 using WorkingWithMaps.Dtos;
-using WorkingWithMaps.Extensions;
+using System.Linq;
 using System.Diagnostics;
 using WorkingWithMaps.Responses;
+using WorkingWithMaps.ViewModels;
+using Microsoft.Extensions.Logging;
+using WorkingWithMaps.Extensions;
 
 namespace WorkingWithMaps.Services
 {
-        public class ClearDriveService : IClearDriveService
+    public class ClearDriveService : IClearDriveService
+    {
+        private readonly HttpClient? _httpClient;
+
+        // Konstruktor, ami biztosítja az IHttpClientFactory injektálását
+        public ClearDriveService(IHttpClientFactory httpClientFactory)
         {
-            private readonly HttpClient? _httpClient;
-
-            public ClearDriveService(IHttpClientFactory? httpClientFactory)
+            if (httpClientFactory != null)
             {
-                if (httpClientFactory is not null)
+                _httpClient = httpClientFactory.CreateClient("ClearDriveApi");
+            }
+            else
+            {
+                Debug.WriteLine("A HttpClientFactory null.");
+            }
+        }
+
+        // A SelectAll metódus, amely lekéri a pozíciókat az API-ból
+        public async Task<List<Position>> SelectAll()
+        {
+            if (_httpClient != null)
+            {
+                List<PositionDto>? result = await _httpClient.GetFromJsonAsync<List<PositionDto>>("api/Position");
+                if (result != null)
                 {
-                    _httpClient = httpClientFactory.CreateClient("ClearDriveApi");
-                }
-                else
-                {
-                    Debug.WriteLine("A HttpClientFactory null.");
+                    return result.Select(positionDto => positionDto.ToPosition()).ToList();
                 }
             }
+            return new List<Position>();
+        }
 
-            public async Task<List<Position>> SelectAll()
-            {
-                if (_httpClient is not null)
-                {
-                    List<PositionDto>? result = await _httpClient.GetFromJsonAsync<List<PositionDto>>("api/Position");
-                    if (result is not null)
-                        return result.Select(positionDto => positionDto.ToPosition()).ToList();
-                }
-                return new List<Position>();
-            }
-
+        // A DeleteAsync metódus, amely töröl egy pozíciót
         public async Task<ControllerResponse> DeleteAsync(Guid id)
         {
             ControllerResponse defaultResponse = new();
-            if (_httpClient is not null)
+
+            if (_httpClient != null)
             {
                 try
                 {
@@ -51,11 +60,14 @@ namespace WorkingWithMaps.Services
                     {
                         string content = await httpResponse.Content.ReadAsStringAsync();
                         ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
-                        if (response is null)
+                        if (response == null)
                         {
                             defaultResponse.ClearAndAddError("A törlés http kérés hibát okozott!");
                         }
-                        else return response;
+                        else
+                        {
+                            return response;
+                        }
                     }
                     else if (!httpResponse.IsSuccessStatusCode)
                     {
@@ -68,32 +80,38 @@ namespace WorkingWithMaps.Services
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"{ex.Message}");
+                    Debug.WriteLine($"Hiba: {ex.Message}");
                 }
             }
+
             defaultResponse.ClearAndAddError("Az adatok törlés nem lehetséges!");
             Debug.WriteLine($"{defaultResponse.ToString()}");
             return defaultResponse;
         }
 
+        // Az InsertAsync metódus, amely új pozíciót ad hozzá
         public async Task<ControllerResponse> InsertAsync(Position position)
         {
             ControllerResponse defaultResponse = new();
-            if (_httpClient is not null)
+
+            if (_httpClient != null)
             {
                 HttpResponseMessage? httpResponse = null;
                 try
                 {
-                    httpResponse = await _httpClient.PostAsJsonAsync("api/Position", position);
+                    httpResponse = await _httpClient.PostAsJsonAsync("api/Position", position.ToPositionDto());
                     if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
                     {
                         string content = await httpResponse.Content.ReadAsStringAsync();
                         ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
-                        if (response is null)
+                        if (response == null)
                         {
                             defaultResponse.ClearAndAddError("A mentés http kérés hibát okozott!");
                         }
-                        else return response;
+                        else
+                        {
+                            return response;
+                        }
                     }
                     else if (!httpResponse.IsSuccessStatusCode)
                     {
@@ -107,9 +125,10 @@ namespace WorkingWithMaps.Services
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"{ex.Message}");
+                    Debug.WriteLine($"Hiba: {ex.Message}");
                 }
             }
+
             defaultResponse.ClearAndAddError("Az adatok mentése nem lehetséges!");
             Debug.WriteLine($"{defaultResponse.ToString()}");
             return defaultResponse;

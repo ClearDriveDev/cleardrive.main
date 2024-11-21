@@ -12,7 +12,7 @@ using WorkingWithMaps.Responses;
 
 namespace WorkingWithMaps.ViewModels;
 
-public partial class PinItemsSourcePageViewModel : BaseViewModel
+public partial class PinItemsSourcePageViewModel : BaseViewModelWithAsyncInitialization
 {
     private readonly IClearDriveService? _clearDriveService;
 
@@ -22,14 +22,14 @@ public partial class PinItemsSourcePageViewModel : BaseViewModel
     [ObservableProperty]
     private Position _selectedLocation;
 
-    public PinItemsSourcePageViewModel()
+    /*public PinItemsSourcePageViewModel()
     {
-        SelectedLocation = new Position();
-    }
+        //SelectedLocation = new Position();
+    }*/
 
     public PinItemsSourcePageViewModel(IClearDriveService? clearDriveService)
     {
-        SelectedLocation = new Position();
+        //SelectedLocation = new Position();
         _clearDriveService = clearDriveService;
         
     }
@@ -39,9 +39,7 @@ public partial class PinItemsSourcePageViewModel : BaseViewModel
     {
         if (_clearDriveService is not null)
         {
-            ControllerResponse result = new();
-             result = await _clearDriveService.InsertAsync(newPosition);
-
+            ControllerResponse result = await _clearDriveService.InsertAsync(newPosition);
             if (!result.HasError)
             {
                 await UpdateView();
@@ -56,12 +54,6 @@ public partial class PinItemsSourcePageViewModel : BaseViewModel
             Debug.WriteLine($"{nameof(_clearDriveService)} is null.");
         }
     }
-
-    /*[RelayCommand]
-    void DoNewStudent()
-    {
-        SelectedLocation = new Position();
-    }*/
 
     [RelayCommand]
     public async Task DoRemove(Position positionToDelete)

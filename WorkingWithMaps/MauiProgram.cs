@@ -1,7 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
-using WorkingWithMaps.Extensions; 
+using WorkingWithMaps.Extensions;
+using WorkingWithMaps.Services;
+using WorkingWithMaps.ViewModels;
+using WorkingWithMaps.Views;
 
 namespace WorkingWithMaps
 {
@@ -11,13 +14,19 @@ namespace WorkingWithMaps
         {
             var builder = MauiApp.CreateBuilder();
 
-            // Szolgáltatások regisztrálása
-            builder.Services.ConfigureApiServices();
-            builder.Services.ConfigureHttpCliens(); 
-            builder.Services.ConfigureViewViewModels();
-            return builder.UseMauiApp<App>()
-                    .UseMauiMaps()
-                    .Build();
+            builder.UseMauiApp<App>();
+
+            // Register services
+            builder.Services.AddHttpClient("ClearDriveApi", client =>
+            {
+                client.BaseAddress = new Uri("http://10.0.2.2:7090/");  // Example for local development
+            });
+            builder.Services.AddScoped<IClearDriveService, ClearDriveService>();
+            builder.Services.AddSingleton<PinItemsSourcePageViewModel>();
+            builder.Services.AddSingleton<PinItemsSourcePage>();
+            builder.UseMauiMaps();
+
+            return builder.Build();
         }
     }
 }
