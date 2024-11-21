@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using WorkingWithMaps.Services;
 
 namespace WorkingWithMaps;
 
@@ -15,7 +16,7 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			})
 			.UseMauiMaps();
-	
+
 
 #if DEBUG
 		builder.Logging.AddDebug();

@@ -2,6 +2,7 @@
 using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
 using WorkingWithMaps.Models;
+using System.Diagnostics;
 
 namespace WorkingWithMaps.Views;
 
@@ -60,6 +61,7 @@ public partial class PinItemsSourcePage : ContentPage
         {
             Position temp =  new Position(new Location(_currentLocation.Latitude, _currentLocation.Longitude));
             await _pinItemsSourcePageViewModel.DoSave(temp);
+            Debug.WriteLine("\nLefutottam0.!\n");
         }
         else
         {

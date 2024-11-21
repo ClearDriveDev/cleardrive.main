@@ -13,15 +13,17 @@ builder.Services.AddSwaggerGen();
 builder.Services.ConfigureCors();
 builder.Services.ConfigureInMemoryContext();
 builder.Services.ConfigureRepos();
+builder.WebHost.UseUrls("http://0.0.0.0:7090");
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CASCors", policy =>
     {
-        policy.WithOrigins("https://localhost:7090","http://10.0.2.2:7090")
+        policy.WithOrigins("http://localhost:7090", "http://10.0.2.2:7090", "http://<your-ip>:7090")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
 });
+
 
 
 var app = builder.Build();
@@ -41,7 +43,9 @@ if (app.Environment.IsDevelopment())
 }
 
 
-app.UseHttpsRedirection();
+
+
+//app.UseHttpsRedirection();
 
 app.UseCors("CASCors");
 

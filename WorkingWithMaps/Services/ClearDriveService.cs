@@ -7,6 +7,7 @@ using System.Net;
 using Newtonsoft.Json;
 using WorkingWithMaps.Dtos;
 using WorkingWithMaps.Extensions;
+using System.Diagnostics;
 
 namespace WorkingWithMaps.Services
 {
@@ -20,13 +21,17 @@ namespace WorkingWithMaps.Services
                 {
                     _httpClient = httpClientFactory.CreateClient("ClearDriveApi");
                 }
+                else
+                {
+                    Debug.WriteLine("A HttpClientFactory null.");
+                }
             }
 
             public async Task<List<Position>> SelectAll()
             {
                 if (_httpClient is not null)
                 {
-                    List<PositionDto>? result = await _httpClient.GetFromJsonAsync<List<PositionDto>>("api/Position");
+                    List<PositionDto>? result = await _httpClient.GetFromJsonAsync<List<PositionDto>>("/api/Position");
                     if (result is not null)
                         return result.Select(positionDto => positionDto.ToPosition()).ToList();
                 }
@@ -40,7 +45,7 @@ namespace WorkingWithMaps.Services
             {
                 try
                 {
-                    HttpResponseMessage httpResponse = await _httpClient.DeleteAsync($"api/Position/{id}");
+                    HttpResponseMessage httpResponse = await _httpClient.DeleteAsync($"/api/Position/{id}");
                     if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
                     {
                         string content = await httpResponse.Content.ReadAsStringAsync();
@@ -77,7 +82,7 @@ namespace WorkingWithMaps.Services
                 HttpResponseMessage? httpResponse = null;
                 try
                 {
-                    httpResponse = await _httpClient.PostAsJsonAsync("api/Position", position.ToPositionDto());
+                    httpResponse = await _httpClient.PostAsJsonAsync("/api/Position", position.ToPositionDto());
                     if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
                     {
                         string content = await httpResponse.Content.ReadAsStringAsync();

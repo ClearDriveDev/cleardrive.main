@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Threading.Tasks;
 using WorkingWithMaps.Extensions;
+using System.Diagnostics;
 
 namespace WorkingWithMaps.ViewModels;
 
@@ -37,14 +38,20 @@ public partial class PinItemsSourcePageViewModel : BaseViewModel
     {
         if (_clearDriveService is not null)
         {
+            Debug.WriteLine("\n\n\n\n\n\n Lefutottam 2.!\n\n");
             string result = "";
             if (!newPosition.HasId)
+            {
                 result = await _clearDriveService.InsertAsync(newPosition);
-
+            }
             if (result.Length == 0)
             {
                 await UpdateView();
             }
+        }
+        else
+        {
+            Debug.WriteLine("\n\n\n\n\n\n ClearDriveService null!\n\n");
         }
     }
 
