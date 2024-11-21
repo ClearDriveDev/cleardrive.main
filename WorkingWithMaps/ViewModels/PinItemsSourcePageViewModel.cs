@@ -8,7 +8,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Threading.Tasks;
 using WorkingWithMaps.Extensions;
 using System.Diagnostics;
-using CAS.shared.Models.Responses;
+using WorkingWithMaps.Responses;
 
 namespace WorkingWithMaps.ViewModels;
 

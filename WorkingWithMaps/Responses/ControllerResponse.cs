@@ -1,4 +1,4 @@
-﻿namespace CAS.shared.Models.Responses
+﻿namespace WorkingWithMaps.Responses
 {
     public class ControllerResponse : ErrorStore
     {

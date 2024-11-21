@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using WorkingWithMaps.Dtos;
 using WorkingWithMaps.Extensions;
 using System.Diagnostics;
-using CAS.shared.Models.Responses;
+using WorkingWithMaps.Responses;
 
 namespace WorkingWithMaps.Services
 {

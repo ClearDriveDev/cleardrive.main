@@ -1,4 +1,4 @@
-﻿using CAS.shared.Models.Responses;
+﻿using WorkingWithMaps.Responses;
 using WorkingWithMaps.Models;
 
 namespace WorkingWithMaps.Services
