@@ -1,27 +1,25 @@
-﻿using Microsoft.Extensions.Logging;
-using WorkingWithMaps.Services;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Maui.Controls.Hosting;
+using Microsoft.Maui.Hosting;
+using WorkingWithMaps.Extensions; // Importáljuk a saját kiterjesztéseinket
 
-namespace WorkingWithMaps;
-
-public static class MauiProgram
+namespace WorkingWithMaps
 {
-	public static MauiApp CreateMauiApp()
-	{
-		var builder = MauiApp.CreateBuilder();
-		builder
-			.UseMauiApp<App>()
-			.ConfigureFonts(fonts =>
-			{
-				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			})
-			.UseMauiMaps();
+    public static class MauiProgram
+    {
+        public static MauiApp CreateMauiApp()
+        {
+            var builder = MauiApp.CreateBuilder();
 
+            // Szolgáltatások regisztrálása
+            builder.Services.ConfigureApiServices(); // A saját kiterjesztésed az API szolgáltatások regisztrálásához
+            builder.Services.ConfigureHttpCliens(); // A HttpClient-ek regisztrálása
+            builder.Services.ConfigureViewViewModels(); // A nézetek és nézetmodellek regisztrálása
 
-#if DEBUG
-		builder.Logging.AddDebug();
-#endif
-
-        return builder.Build();
-	}
+            return builder
+                .UseMauiApp<App>() // Az alkalmazás beállítása
+                .UseMauiMaps()
+                .Build();
+        }
+    }
 }
