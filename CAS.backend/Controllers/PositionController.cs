@@ -69,7 +69,7 @@ namespace CAS.backend.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAdminAsync(Guid id)
+        public async Task<IActionResult> DeletePsoitionAsync(Guid id)
         {
             ControllerResponse response = await _posRepo.DeleteAsync(id);
             if (response.HasError)

@@ -21,7 +21,7 @@
 
     public Position()
     {
-        Id = Guid.Empty;
+        Id = Guid.NewGuid();
         Latitude = 0.0;
         Longitude = 0.0;
     }
