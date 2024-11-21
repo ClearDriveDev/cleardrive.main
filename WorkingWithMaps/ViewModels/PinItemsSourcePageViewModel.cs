@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Threading.Tasks;
 using WorkingWithMaps.Extensions;
 using System.Diagnostics;
+using CAS.shared.Models.Responses;
 
 namespace WorkingWithMaps.ViewModels;
 
@@ -38,20 +39,21 @@ public partial class PinItemsSourcePageViewModel : BaseViewModel
     {
         if (_clearDriveService is not null)
         {
-            Debug.WriteLine("\n\n\n\n\n\n Lefutottam 2.!\n\n");
-            string result = "";
-            if (!newPosition.HasId)
-            {
-                result = await _clearDriveService.InsertAsync(newPosition);
-            }
-            if (result.Length == 0)
+            ControllerResponse result = new();
+             result = await _clearDriveService.InsertAsync(newPosition);
+
+            if (!result.HasError)
             {
                 await UpdateView();
+            }
+            else
+            {
+                Debug.WriteLine($"{result.ToString()}");
             }
         }
         else
         {
-            Debug.WriteLine("\n\n\n\n\n\n ClearDriveService null!\n\n");
+            Debug.WriteLine($"{nameof(_clearDriveService)} is null.");
         }
     }
 
@@ -62,15 +64,23 @@ public partial class PinItemsSourcePageViewModel : BaseViewModel
     }*/
 
     [RelayCommand]
-    public async Task DoRemove(Position position)
+    public async Task DoRemove(Position positionToDelete)
     {
         if (_clearDriveService is not null)
         {
-            string result = await _clearDriveService.DeleteAsync(position.Id);
-            if (result.Length==0)
+            ControllerResponse result = await _clearDriveService.DeleteAsync(positionToDelete.Id);
+            if (!result.HasError)
             {
                 await UpdateView();
             }
+            else
+            {
+                Debug.WriteLine($"{result.ToString()}");
+            }
+        }
+        else
+        {
+            Debug.WriteLine($"{nameof(_clearDriveService)} is null.");
         }
     }
 
@@ -97,6 +107,10 @@ public partial class PinItemsSourcePageViewModel : BaseViewModel
         {
             List<Position> positions = await _clearDriveService.SelectAll();
             Locations = new ObservableCollection<Position>(positions);
+        }
+        else
+        {
+            Debug.WriteLine($"{nameof(_clearDriveService)} is null.");
         }
     }
 

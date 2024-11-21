@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
-using WorkingWithMaps.Extensions; // Importáljuk a saját kiterjesztéseinket
+using WorkingWithMaps.Extensions; 
 
 namespace WorkingWithMaps
 {
@@ -12,14 +12,12 @@ namespace WorkingWithMaps
             var builder = MauiApp.CreateBuilder();
 
             // Szolgáltatások regisztrálása
-            builder.Services.ConfigureApiServices(); // A saját kiterjesztésed az API szolgáltatások regisztrálásához
-            builder.Services.ConfigureHttpCliens(); // A HttpClient-ek regisztrálása
-            builder.Services.ConfigureViewViewModels(); // A nézetek és nézetmodellek regisztrálása
-
-            return builder
-                .UseMauiApp<App>() // Az alkalmazás beállítása
-                .UseMauiMaps()
-                .Build();
+            builder.Services.ConfigureApiServices();
+            builder.Services.ConfigureHttpCliens(); 
+            builder.Services.ConfigureViewViewModels();
+            return builder.UseMauiApp<App>()
+                    .UseMauiMaps()
+                    .Build();
         }
     }
 }

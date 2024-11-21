@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using WorkingWithMaps.Dtos;
 using WorkingWithMaps.Extensions;
 using System.Diagnostics;
+using CAS.shared.Models.Responses;
 
 namespace WorkingWithMaps.Services
 {
@@ -31,28 +32,28 @@ namespace WorkingWithMaps.Services
             {
                 if (_httpClient is not null)
                 {
-                    List<PositionDto>? result = await _httpClient.GetFromJsonAsync<List<PositionDto>>("/api/Position");
+                    List<PositionDto>? result = await _httpClient.GetFromJsonAsync<List<PositionDto>>("api/Position");
                     if (result is not null)
                         return result.Select(positionDto => positionDto.ToPosition()).ToList();
                 }
                 return new List<Position>();
             }
 
-        public async Task<string> DeleteAsync(Guid id)
+        public async Task<ControllerResponse> DeleteAsync(Guid id)
         {
-            string defaultResponse = "";
+            ControllerResponse defaultResponse = new();
             if (_httpClient is not null)
             {
                 try
                 {
-                    HttpResponseMessage httpResponse = await _httpClient.DeleteAsync($"/api/Position/{id}");
+                    HttpResponseMessage httpResponse = await _httpClient.DeleteAsync($"api/Position/{id}");
                     if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
                     {
                         string content = await httpResponse.Content.ReadAsStringAsync();
-                        string? response = JsonConvert.DeserializeObject<string>(content);
+                        ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
                         if (response is null)
                         {
-                            defaultResponse="A törlés http kérés hibát okozott!";
+                            defaultResponse.ClearAndAddError("A törlés http kérés hibát okozott!");
                         }
                         else return response;
                     }
@@ -67,29 +68,30 @@ namespace WorkingWithMaps.Services
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"{ex.Message}");
+                    Debug.WriteLine($"{ex.Message}");
                 }
             }
-            defaultResponse="Az adatok törlése nem lehetséges!";
+            defaultResponse.ClearAndAddError("Az adatok törlés nem lehetséges!");
+            Debug.WriteLine($"{defaultResponse.ToString()}");
             return defaultResponse;
         }
 
-        public async Task<string> InsertAsync(Position position)
+        public async Task<ControllerResponse> InsertAsync(Position position)
         {
-            string defaultResponse = "";
+            ControllerResponse defaultResponse = new();
             if (_httpClient is not null)
             {
                 HttpResponseMessage? httpResponse = null;
                 try
                 {
-                    httpResponse = await _httpClient.PostAsJsonAsync("/api/Position", position.ToPositionDto());
+                    httpResponse = await _httpClient.PostAsJsonAsync("api/Position", position);
                     if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
                     {
                         string content = await httpResponse.Content.ReadAsStringAsync();
-                        string? response = JsonConvert.DeserializeObject<string>(content);
+                        ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
                         if (response is null)
                         {
-                            defaultResponse = "A mentés http kérés hibát okozott!";
+                            defaultResponse.ClearAndAddError("A mentés http kérés hibát okozott!");
                         }
                         else return response;
                     }
@@ -105,10 +107,11 @@ namespace WorkingWithMaps.Services
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"{ex.Message}");
+                    Debug.WriteLine($"{ex.Message}");
                 }
             }
-            defaultResponse= "Az adatok mentése nem lehetséges!";
+            defaultResponse.ClearAndAddError("Az adatok mentése nem lehetséges!");
+            Debug.WriteLine($"{defaultResponse.ToString()}");
             return defaultResponse;
         }
     }

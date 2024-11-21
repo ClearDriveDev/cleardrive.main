@@ -2,7 +2,7 @@
 
 namespace WorkingWithMaps.ViewModels.Base
 {
-    public class BaseViewModel : ObservableObject, IAsyncInitialization
+    public abstract class BaseViewModel : ObservableObject, IAsyncInitialization
     {
         public virtual Task InitializeAsync()
         {
