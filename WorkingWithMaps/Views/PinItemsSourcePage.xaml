@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:maps="http://schemas.microsoft.com/dotnet/2021/maui/maps"
              x:Class="WorkingWithMaps.Views.PinItemsSourcePage"
-             Title="Fooldal">
+             Title="Fooldal"
+             Loaded="ContentPage_Loaded">
     
     <Grid Margin="10,35,10,10">
         <Grid.RowDefinitions>

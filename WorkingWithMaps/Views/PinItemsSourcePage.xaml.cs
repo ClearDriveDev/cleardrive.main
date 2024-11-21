@@ -35,21 +35,24 @@ public partial class PinItemsSourcePage : ContentPage
 
     public PinItemsSourcePage(PinItemsSourcePageViewModel viewModel)
     {
-        InitializeComponent();
-
-        // BindingContext-et itt rendeljük hozzá
+        InitializeComponent();  
         BindingContext = viewModel;
-
-        // Az injektált ViewModel példányosítása automatikusan megtörténik
         _pinItemsSourcePageViewModel = viewModel;
 
         map.IsShowingUser = true;
         map.IsScrollEnabled = true;
         map.IsZoomEnabled = true;
-
-        SetUserLocationOnMapAsync();
     }
+    private async void ContentPage_Loaded(object sender, EventArgs e)
+    {
+        await SetUserLocationOnMapAsync();
+        await _pinItemsSourcePageViewModel.InitializeAsync();
+        foreach (var item in _pinItemsSourcePageViewModel.Locations)
+        {
+            map.Pins.Add(_pinItemsSourcePageViewModel.CreatePin(item.Location));
+        }
 
+    }
     private void OnMapClicked(object sender, MapClickedEventArgs e)
     {
         if (map.Pins.Count > 0)
@@ -71,7 +74,7 @@ public partial class PinItemsSourcePage : ContentPage
         }
         else
         {
-            DisplayAlert("Figyelem!", "Nincs helyzet megadva!", "Ok");
+            await DisplayAlert("Figyelem!", "Nincs helyzet megadva!", "Ok");
         }
     }
 

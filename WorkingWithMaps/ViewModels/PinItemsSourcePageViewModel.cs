@@ -19,17 +19,9 @@ public partial class PinItemsSourcePageViewModel : BaseViewModelWithAsyncInitial
     [ObservableProperty]
     private ObservableCollection<Position> _locations = new();
 
-    [ObservableProperty]
-    private Position _selectedLocation;
-
-    /*public PinItemsSourcePageViewModel()
-    {
-        //SelectedLocation = new Position();
-    }*/
 
     public PinItemsSourcePageViewModel(IClearDriveService? clearDriveService)
     {
-        //SelectedLocation = new Position();
         _clearDriveService = clearDriveService;
         
     }
@@ -76,18 +68,6 @@ public partial class PinItemsSourcePageViewModel : BaseViewModelWithAsyncInitial
         }
     }
 
-    /*public void AddLocation(Location temp)
-    {
-        _locations.Add(LocationToPositionConverter(temp));
-    }*/
-
-    /*public Position LocationToPositionConverter(Location temp) 
-    {
-        Position _temp_max = new Position(new Location(0,0));
-        _temp_max.LocationINPC = temp;
-       return _temp_max;
-    }*/
-
     public override async Task InitializeAsync()
     {
         await UpdateView();
@@ -116,12 +96,4 @@ public partial class PinItemsSourcePageViewModel : BaseViewModelWithAsyncInitial
             Type = PinType.SavedPin
         };
     }
-
-    /*public void RemoveLocation(Position temp)
-    {
-        if (_locations.Any())
-        {
-            _locations.Remove(temp);
-        }
-    }*/
 }
