@@ -15,13 +15,13 @@
 
         public Position(Location location)
         { 
-            Id = new Guid();
+            Id = Guid.NewGuid();
             Location = location;
         }
 
         public Position()
         {
-            Id = Guid.Empty;
+            Id = Guid.NewGuid();
             Location = new Location();
         }
 
