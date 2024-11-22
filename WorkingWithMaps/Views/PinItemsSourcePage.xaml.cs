@@ -32,20 +32,24 @@ public partial class PinItemsSourcePage : ContentPage
 
     private PinItemsSourcePageViewModel _pinItemsSourcePageViewModel;
     private Location _currentLocation;
+    private int clicked = 0;
 
     public PinItemsSourcePage(PinItemsSourcePageViewModel viewModel)
     {
-        InitializeComponent();  
+        InitializeComponent();
         BindingContext = viewModel;
         _pinItemsSourcePageViewModel = viewModel;
 
         map.IsShowingUser = true;
         map.IsScrollEnabled = true;
         map.IsZoomEnabled = true;
+
+        SetUserLocationOnMapAsync();
+
+
     }
     private async void ContentPage_Loaded(object sender, EventArgs e)
     {
-        await SetUserLocationOnMapAsync();
         await _pinItemsSourcePageViewModel.InitializeAsync();
         foreach (var item in _pinItemsSourcePageViewModel.Locations)
         {
@@ -55,13 +59,23 @@ public partial class PinItemsSourcePage : ContentPage
     }
     private void OnMapClicked(object sender, MapClickedEventArgs e)
     {
-        if (map.Pins.Count > 0)
-        {
-            map.Pins.Clear();
+        clicked++;
+        if (clicked == 1) {
+            map.Pins.Add(_pinItemsSourcePageViewModel.CreatePin(e.Location));
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(e.Location, Distance.FromMeters(100)));
+            _currentLocation = e.Location;
         }
-        map.Pins.Add(_pinItemsSourcePageViewModel.CreatePin(e.Location));
-        map.MoveToRegion(MapSpan.FromCenterAndRadius(e.Location, Distance.FromMeters(100)));
-        _currentLocation = e.Location;
+        else
+        {
+            map.Pins.RemoveAt(CreatedPins()-1); 
+            _currentLocation = null;
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(e.Location, Distance.FromMeters(100)));
+            map.Pins.Add(_pinItemsSourcePageViewModel.CreatePin(e.Location));
+            _currentLocation = e.Location;
+            clicked = 1;
+        }
+       
+
     }
 
     private async void AddButton(object sender, EventArgs e)
@@ -80,12 +94,24 @@ public partial class PinItemsSourcePage : ContentPage
 
     private void RemoveButton(object sender, EventArgs e)
     {
-        map.Pins.Clear();
+       //int latitude = map.Pins.Select(s=> int(s.Location.Latitude));
+       
+        
         _currentLocation = null;
     }
 
     private void OnViewButtonClicked(object sender, EventArgs e)
     {
         map.MapType = (map.MapType == MapType.Street) ? MapType.Hybrid : MapType.Street;
+    }
+
+    private int CreatedPins()
+    {
+        int temp = 0;
+        foreach (var item in map.Pins)
+        {
+            temp++;
+        }
+        return temp;
     }
 }

@@ -59,5 +59,27 @@ namespace CAS.backend.Repos
             }
             return response;
         }
+
+        public async Task<ControllerResponse> InsertAsync(Position position)
+        {
+            ControllerResponse response = new ControllerResponse();
+
+            try
+            {
+                // Add the new position to the Positions DbSet
+                await _dbContext.Positions.AddAsync(position);
+
+                // Save the changes to the database
+                await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                // If an error occurs, handle it and append it to the response
+                response.AppendNewError($"An error occurred while inserting the position: {ex.Message}");
+            }
+
+            return response;
+        }
+
     }
 }

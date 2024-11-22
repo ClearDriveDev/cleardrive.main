@@ -8,6 +8,7 @@ namespace CAS.backend.Repos
         Task<List<Position>> GetAll();
         Task<Position?> GetBy(Guid id);
         Task<ControllerResponse> UpdatePositionAsync(Position position);
+        Task<ControllerResponse> InsertAsync(Position position);
         Task<ControllerResponse> DeleteAsync(Guid id);
     }
 }

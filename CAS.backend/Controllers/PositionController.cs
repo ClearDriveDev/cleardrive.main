@@ -35,6 +35,34 @@ namespace CAS.backend.Controllers
             return BadRequest("Az adatok elérhetetlenek!");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> InsertPositionAsync(PositionDto positionDto)
+        {
+            try
+            {
+                Position position = new Position
+                {
+                    Id = positionDto.Id,
+                    Latitude = positionDto.Latitude,
+                    Longitude = positionDto.Longitude
+                };
+
+                ControllerResponse response = await _posRepo.InsertAsync(position);
+
+                if (response.HasError)
+                {
+                    return BadRequest(response);
+                }
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
         [HttpGet]
         public async Task<IActionResult> SelectAllRecordToListAsync()
         {
@@ -50,7 +78,7 @@ namespace CAS.backend.Controllers
         }
 
         [HttpPut()]
-        public async Task<ActionResult> UpdatePositionAsync(PositionDto entity)
+        public async Task<IActionResult> UpdatePositionAsync(PositionDto entity)
         {
             Position position = new Position
             {
