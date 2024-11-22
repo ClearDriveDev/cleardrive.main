@@ -26,14 +26,15 @@
                 <StackLayout Orientation="Horizontal"
              HorizontalOptions="Center"
              Spacing="30">
-                <Button Text="Send"
+                <Button Text="Kuldes"
                         Clicked="AddButton"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal"
                     HorizontalOptions="Center"
                     Spacing="30">
-                    <Button Text="Remove"
-                     Clicked="RemoveButton"/>
+                    <Button Text="Aktualis helyzet kuldese" Clicked="ActualLocationSend"/>
+                    <!--<Button Text="Remove"
+                     Clicked="RemoveButton"/>-->
                 </StackLayout>
             </StackLayout>
         </ScrollView>
