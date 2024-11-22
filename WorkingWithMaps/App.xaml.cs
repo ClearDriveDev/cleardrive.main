@@ -10,7 +10,6 @@ public partial class App : Application
     {
         InitializeComponent();
 
-        // Using the service provider to resolve the main page
         MainPage = serviceProvider.GetRequiredService<PinItemsSourcePage>();
     }
 }

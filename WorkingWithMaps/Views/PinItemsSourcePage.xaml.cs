@@ -75,7 +75,6 @@ public partial class PinItemsSourcePage : ContentPage
             clicked = 1;
         }
        
-
     }
 
     private async void AddButton(object sender, EventArgs e)
@@ -84,7 +83,7 @@ public partial class PinItemsSourcePage : ContentPage
         {
             Position temp = new Position(new Location(_currentLocation.Latitude, _currentLocation.Longitude));
             await _pinItemsSourcePageViewModel.DoSave(temp);
-            Debug.WriteLine("\nLefutottam0.!\n");
+            map.Pins.Add(_pinItemsSourcePageViewModel.CreatePin(_currentLocation));
         }
         else
         {
