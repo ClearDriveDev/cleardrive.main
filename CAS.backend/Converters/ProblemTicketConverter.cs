@@ -1,7 +1,7 @@
-﻿using CAS.shared.Dtos;
-using CAS.shared.Models.Datas.Entities;
+﻿using CAS.backend.Dtos;
+using CAS.backend.Models.Datas.Entities;
 
-namespace CAS.shared.Converters
+namespace CAS.backend.Converters
 {
     public static class ProblemTicketConverter
     {

@@ -1,4 +1,4 @@
-﻿namespace CAS.shared.Models.Datas.Entities
+﻿namespace CAS.backend.Models.Datas.Entities
 {
     public class User
     {

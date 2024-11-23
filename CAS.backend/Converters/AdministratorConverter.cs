@@ -1,12 +1,6 @@
-﻿using CAS.shared.Dtos;
-using CAS.shared.Models.Datas.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CAS.shared.Converters
+﻿using CAS.backend.Dtos;
+using CAS.backend.Models.Datas.Entities;
+namespace CAS.backend.Converters
 {
     public static class AdministratorConverter
     {

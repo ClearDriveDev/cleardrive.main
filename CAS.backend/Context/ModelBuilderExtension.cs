@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using CAS.shared.Models.Datas.Entities;
-using CAS.shared.Models.Datas.Enums;
+using CAS.backend.Models.Datas.Entities;
+using CAS.backend.Models.Datas.Enums;
 
 namespace CAS.backend.Context
 {

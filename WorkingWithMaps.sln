@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkingWithMaps", "WorkingW
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CAS.backend", "CAS.backend\CAS.backend.csproj", "{C92C90FF-4D2F-4FA6-87B4-33FEEDE9C3EE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CAS.shared", "CAS.shared\CAS.shared.csproj", "{D44C5DD0-0606-459C-A943-FDFFDB11AE37}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAS.dekstop", "CAS.dekstop\CAS.dekstop.csproj", "{D64B5BC8-7543-4600-A79C-5EA976CEE685}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +25,10 @@ Global
 		{C92C90FF-4D2F-4FA6-87B4-33FEEDE9C3EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C92C90FF-4D2F-4FA6-87B4-33FEEDE9C3EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C92C90FF-4D2F-4FA6-87B4-33FEEDE9C3EE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D44C5DD0-0606-459C-A943-FDFFDB11AE37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D44C5DD0-0606-459C-A943-FDFFDB11AE37}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D44C5DD0-0606-459C-A943-FDFFDB11AE37}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D44C5DD0-0606-459C-A943-FDFFDB11AE37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D64B5BC8-7543-4600-A79C-5EA976CEE685}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D64B5BC8-7543-4600-A79C-5EA976CEE685}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D64B5BC8-7543-4600-A79C-5EA976CEE685}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D64B5BC8-7543-4600-A79C-5EA976CEE685}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

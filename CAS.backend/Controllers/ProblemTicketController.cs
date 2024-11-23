@@ -1,9 +1,9 @@
-﻿using CAS.shared.Models.Datas.Entities;
-using CAS.shared.Models.Responses;
+﻿using CAS.backend.Converters;
+using CAS.backend.Dtos;
+using CAS.backend.Models.Datas.Entities;
+using CAS.backend.Models.Responses;
 using CAS.backend.Repos;
 using Microsoft.AspNetCore.Mvc;
-using CAS.shared.Converters;
-using CAS.shared.Dtos;
 
 namespace CAS.backend.Controllers
 {

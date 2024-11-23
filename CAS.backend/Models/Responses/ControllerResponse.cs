@@ -1,4 +1,4 @@
-﻿namespace CAS.shared.Models.Responses
+﻿namespace CAS.backend.Models.Responses
 {
     public class ControllerResponse : ErrorStore
     {

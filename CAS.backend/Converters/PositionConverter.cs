@@ -1,12 +1,7 @@
-﻿using CAS.shared.Dtos;
-using CAS.shared.Models.Datas.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CAS.backend.Dtos;
+using CAS.backend.Models.Datas.Entities;
 
-namespace CAS.shared.Converters
+namespace CAS.backend.Converters
 {
     public static class PositionConverter
     {

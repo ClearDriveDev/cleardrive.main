@@ -1,5 +1,5 @@
-﻿using CAS.shared.Models.Datas.Entities;
-using CAS.shared.Models.Responses;
+﻿using CAS.backend.Models.Datas.Entities;
+using CAS.backend.Models.Responses;
 
 namespace CAS.backend.Repos
 {

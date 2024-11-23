@@ -1,4 +1,4 @@
-﻿namespace CAS.shared.Dtos
+﻿namespace CAS.backend.Dtos
 {
     public class PositionDto
     {

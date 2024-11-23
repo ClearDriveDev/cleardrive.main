@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CAS.shared.Models.Datas.Entities
+﻿namespace CAS.backend.Models.Datas.Entities
 {
     public class Administrator
     {

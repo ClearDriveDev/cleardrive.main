@@ -1,4 +1,4 @@
-﻿using CAS.shared.Models.Datas.Entities;
+﻿using CAS.backend.Models.Datas.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;

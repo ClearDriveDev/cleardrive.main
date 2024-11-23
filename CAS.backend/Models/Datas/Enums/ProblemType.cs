@@ -1,4 +1,4 @@
-﻿namespace CAS.shared.Models.Datas.Enums
+﻿namespace CAS.backend.Models.Datas.Enums
 {
     public enum ProblemType
     {
