@@ -1,6 +1,6 @@
 ﻿using CAS.backend.Models.Datas.Enums;
 
-namespace CAS.shared.Dtos
+namespace CAS.backend.Dtos
 {
     public class ProblemTicketDto
     {
