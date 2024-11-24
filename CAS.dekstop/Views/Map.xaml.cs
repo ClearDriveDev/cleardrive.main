@@ -30,25 +30,8 @@ namespace CAS.dekstop.Views
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             PointLatLng point = new PointLatLng(46.25312, 20.143497);
-
-            /*MapMarker marker = new GMapMarker(point);
-
-            Ellipse ellipse = new Ellipse
-            {
-                Width = 20,
-                Height = 20,
-                Fill = Brushes.Red,
-                Stroke = Brushes.Black,
-                StrokeThickness = 2
-            };
-
-            marker.Shape = ellipse;*/
-
             GMapControl.Position = point;
-
             GMapControl.Zoom = 15;
-
-            //GMapControl.Markers.Add(marker);
 
             await _mapPageViewModel.InitializeAsync();
             foreach (var item in _mapPageViewModel.Locations)
