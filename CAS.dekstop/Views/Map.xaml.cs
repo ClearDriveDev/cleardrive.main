@@ -2,14 +2,19 @@
 using GMap.NET;
 using System.Windows;
 using GMap.NET.WindowsPresentation;
+using CAS.desktop.ViewModels;
 
 namespace CAS.dekstop.Views
 {
     public partial class Map : Window
     {
+
+        private MapPageViewModel _mapPageViewModel;
         public Map()
         {
             InitializeComponent();
+
+            _mapPageViewModel = new MapPageViewModel();
 
             GMapProviders.GoogleMap.ApiKey = "AIzaSyBn_LH5TSBgmEQAJD6wDAy82eWv8zQW5eE";
             GMapControl.MapProvider = GMapProviders.GoogleMap;

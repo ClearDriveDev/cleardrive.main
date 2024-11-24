@@ -10,20 +10,20 @@ using CAS.dekstop.ViewModels.Base;
 using GMap.NET.WindowsPresentation;
 using System.Drawing;
 using GMap.NET;
+using CAS.desktop.Services;
 
-namespace WorkingWithMaps.ViewModels;
+namespace CAS.desktop.ViewModels;
 
-public partial class PinItemsSourcePageViewModel : BaseViewModelWithAsyncInitialization
+public partial class MapPageViewModel : BaseViewModelWithAsyncInitialization
 {
     private readonly IClearDriveService? _clearDriveService;
 
     [ObservableProperty]
     private ObservableCollection<Position> _locations = new();
 
-
-    public PinItemsSourcePageViewModel(IClearDriveService? clearDriveService)
+    public MapPageViewModel()
     {
-        _clearDriveService = clearDriveService;
+        _clearDriveService = new ClearDriveService();
         
     }
 

@@ -10,18 +10,18 @@ using System.Diagnostics;
 using CAS.dekstop.Responses;
 using CAS.dekstop.Services;
 
-namespace WorkingCAS.dekstopWithMaps.Services
+namespace CAS.desktop.Services
 {
     public class ClearDriveService : IClearDriveService
     {
         private readonly HttpClient? _httpClient;
+        IHttpClientFactory? _httpClientFactory;
 
-        // Konstruktor, ami biztosítja az IHttpClientFactory injektálását
-        public ClearDriveService(IHttpClientFactory httpClientFactory)
+        public ClearDriveService()
         {
-            if (httpClientFactory != null)
+            if (_httpClientFactory != null)
             {
-                _httpClient = httpClientFactory.CreateClient("ClearDriveApi");
+                _httpClient = _httpClientFactory.CreateClient("ClearDriveApi");
             }
             else
             {
@@ -29,7 +29,6 @@ namespace WorkingCAS.dekstopWithMaps.Services
             }
         }
 
-        // A SelectAll metódus, amely lekéri a pozíciókat az API-ból
         public async Task<List<Position>> SelectAll()
         {
             if (_httpClient != null)
@@ -43,7 +42,6 @@ namespace WorkingCAS.dekstopWithMaps.Services
             return new List<Position>();
         }
 
-        // A DeleteAsync metódus, amely töröl egy pozíciót
         public async Task<ControllerResponse> DeleteAsync(Guid id)
         {
             ControllerResponse defaultResponse = new();
@@ -86,7 +84,6 @@ namespace WorkingCAS.dekstopWithMaps.Services
             return defaultResponse;
         }
 
-        // Az InsertAsync metódus, amely új pozíciót ad hozzá
         public async Task<ControllerResponse> InsertAsync(Position position)
         {
             ControllerResponse defaultResponse = new();
