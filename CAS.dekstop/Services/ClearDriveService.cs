@@ -14,70 +14,62 @@ namespace CAS.desktop.Services
 {
     public class ClearDriveService : IClearDriveService
     {
-        private readonly HttpClient? _httpClient;
-        IHttpClientFactory? _httpClientFactory;
+        private readonly HttpClient _httpClient;
 
-        public ClearDriveService()
+    public ClearDriveService()
         {
-            if (_httpClientFactory != null)
+            _httpClient = new HttpClient
             {
-                _httpClient = _httpClientFactory.CreateClient("ClearDriveApi");
-            }
-            else
-            {
-                Debug.WriteLine("A HttpClientFactory null.");
-            }
+                BaseAddress = new Uri("http://localhost:7090/") 
+            };
         }
 
         public async Task<List<Position>> SelectAll()
         {
-            if (_httpClient != null)
+
+            List<Position>? result = await _httpClient.GetFromJsonAsync<List<Position>>("api/Position");
+            if (result != null)
             {
-                List<Position>? result = await _httpClient.GetFromJsonAsync<List<Position>>("api/Position");
-                if (result != null)
-                {
-                    return result.Select(position => position).ToList();
-                }
+                return result.Select(position => position).ToList();
             }
-            return new List<Position>();
+            
+        return new List<Position>();
         }
 
         public async Task<ControllerResponse> DeleteAsync(Guid id)
         {
             ControllerResponse defaultResponse = new();
 
-            if (_httpClient != null)
+            try
             {
-                try
+                HttpResponseMessage httpResponse = await _httpClient.DeleteAsync($"api/Position/{id}");
+                if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
                 {
-                    HttpResponseMessage httpResponse = await _httpClient.DeleteAsync($"api/Position/{id}");
-                    if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
+                    string content = await httpResponse.Content.ReadAsStringAsync();
+                    ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
+                    if (response == null)
                     {
-                        string content = await httpResponse.Content.ReadAsStringAsync();
-                        ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
-                        if (response == null)
-                        {
-                            defaultResponse.ClearAndAddError("A törlés http kérés hibát okozott!");
-                        }
-                        else
-                        {
-                            return response;
-                        }
-                    }
-                    else if (!httpResponse.IsSuccessStatusCode)
-                    {
-                        httpResponse.EnsureSuccessStatusCode();
+                        defaultResponse.ClearAndAddError("A törlés http kérés hibát okozott!");
                     }
                     else
                     {
-                        return defaultResponse;
+                        return response;
                     }
                 }
-                catch (Exception ex)
+                else if (!httpResponse.IsSuccessStatusCode)
                 {
-                    Debug.WriteLine($"Hiba: {ex.Message}");
+                    httpResponse.EnsureSuccessStatusCode();
+                }
+                else
+                {
+                    return defaultResponse;
                 }
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Hiba: {ex.Message}");
+            }
+            
 
             defaultResponse.ClearAndAddError("Az adatok törlés nem lehetséges!");
             Debug.WriteLine($"{defaultResponse.ToString()}");
@@ -88,40 +80,38 @@ namespace CAS.desktop.Services
         {
             ControllerResponse defaultResponse = new();
 
-            if (_httpClient != null)
+            HttpResponseMessage? httpResponse = null;
+            try
             {
-                HttpResponseMessage? httpResponse = null;
-                try
+                httpResponse = await _httpClient.PostAsJsonAsync("api/Position", position);
+                if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
                 {
-                    httpResponse = await _httpClient.PostAsJsonAsync("api/Position", position);
-                    if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
+                    string content = await httpResponse.Content.ReadAsStringAsync();
+                    ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
+                    if (response == null)
                     {
-                        string content = await httpResponse.Content.ReadAsStringAsync();
-                        ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
-                        if (response == null)
-                        {
-                            defaultResponse.ClearAndAddError("A mentés http kérés hibát okozott!");
-                        }
-                        else
-                        {
-                            return response;
-                        }
-                    }
-                    else if (!httpResponse.IsSuccessStatusCode)
-                    {
-                        httpResponse.EnsureSuccessStatusCode();
+                        defaultResponse.ClearAndAddError("A mentés http kérés hibát okozott!");
                     }
                     else
                     {
-                        return defaultResponse;
+                        return response;
                     }
-
                 }
-                catch (Exception ex)
+                else if (!httpResponse.IsSuccessStatusCode)
                 {
-                    Debug.WriteLine($"Hiba: {ex.Message}");
+                    httpResponse.EnsureSuccessStatusCode();
                 }
+                else
+                {
+                    return defaultResponse;
+                }
+
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Hiba: {ex.Message}");
+            }
+            
 
             defaultResponse.ClearAndAddError("Az adatok mentése nem lehetséges!");
             Debug.WriteLine($"{defaultResponse.ToString()}");
