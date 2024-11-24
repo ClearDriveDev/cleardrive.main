@@ -19,7 +19,6 @@ namespace WorkingWithMaps.Services
     {
         private readonly HttpClient? _httpClient;
 
-        // Konstruktor, ami biztosítja az IHttpClientFactory injektálását
         public ClearDriveService(IHttpClientFactory httpClientFactory)
         {
             if (httpClientFactory != null)
@@ -32,7 +31,6 @@ namespace WorkingWithMaps.Services
             }
         }
 
-        // A SelectAll metódus, amely lekéri a pozíciókat az API-ból
         public async Task<List<Position>> SelectAll()
         {
             if (_httpClient != null)
@@ -46,7 +44,6 @@ namespace WorkingWithMaps.Services
             return new List<Position>();
         }
 
-        // A DeleteAsync metódus, amely töröl egy pozíciót
         public async Task<ControllerResponse> DeleteAsync(Guid id)
         {
             ControllerResponse defaultResponse = new();
@@ -88,8 +85,6 @@ namespace WorkingWithMaps.Services
             Debug.WriteLine($"{defaultResponse.ToString()}");
             return defaultResponse;
         }
-
-        // Az InsertAsync metódus, amely új pozíciót ad hozzá
         public async Task<ControllerResponse> InsertAsync(Position position)
         {
             ControllerResponse defaultResponse = new();
