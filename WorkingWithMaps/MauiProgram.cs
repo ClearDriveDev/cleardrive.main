@@ -15,11 +15,10 @@ namespace WorkingWithMaps
             var builder = MauiApp.CreateBuilder();
 
             builder.UseMauiApp<App>();
-
-            // Register services
-            builder.Services.AddHttpClient("ClearDriveApi", client =>
+            
+           builder.Services.AddHttpClient("ClearDriveApi", client =>
             {
-                client.BaseAddress = new Uri("http://10.0.2.2:7090/");  // Example for local development
+                client.BaseAddress = new Uri("http://10.0.2.2:7090/");
             });
             builder.Services.AddScoped<IClearDriveService, ClearDriveService>();
             builder.Services.AddSingleton<PinItemsSourcePageViewModel>();

@@ -85,44 +85,43 @@ namespace WorkingWithMaps.Services
             Debug.WriteLine($"{defaultResponse.ToString()}");
             return defaultResponse;
         }
+
         public async Task<ControllerResponse> InsertAsync(Position position)
         {
             ControllerResponse defaultResponse = new();
 
-            if (_httpClient != null)
+            HttpResponseMessage? httpResponse = null;
+            try
             {
-                HttpResponseMessage? httpResponse = null;
-                try
+                httpResponse = await _httpClient.PostAsJsonAsync("api/Position", position.ToPositionDto());
+                if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
                 {
-                    httpResponse = await _httpClient.PostAsJsonAsync("api/Position", position.ToPositionDto());
-                    if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
+                    string content = await httpResponse.Content.ReadAsStringAsync();
+                    ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
+                    if (response == null)
                     {
-                        string content = await httpResponse.Content.ReadAsStringAsync();
-                        ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
-                        if (response == null)
-                        {
-                            defaultResponse.ClearAndAddError("A mentés http kérés hibát okozott!");
-                        }
-                        else
-                        {
-                            return response;
-                        }
-                    }
-                    else if (!httpResponse.IsSuccessStatusCode)
-                    {
-                        httpResponse.EnsureSuccessStatusCode();
+                        defaultResponse.ClearAndAddError("A mentés http kérés hibát okozott!");
                     }
                     else
                     {
-                        return defaultResponse;
+                        return response;
                     }
-
                 }
-                catch (Exception ex)
+                else if (!httpResponse.IsSuccessStatusCode)
                 {
-                    Debug.WriteLine($"Hiba: {ex.Message}");
+                    httpResponse.EnsureSuccessStatusCode();
                 }
+                else
+                {
+                    return defaultResponse;
+                }
+
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Hiba: {ex.Message}");
+            }
+
 
             defaultResponse.ClearAndAddError("Az adatok mentése nem lehetséges!");
             Debug.WriteLine($"{defaultResponse.ToString()}");
@@ -130,3 +129,4 @@ namespace WorkingWithMaps.Services
         }
     }
 }
+

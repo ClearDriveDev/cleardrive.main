@@ -47,6 +47,7 @@ public partial class PinItemsSourcePage : ContentPage
         BindingContext = viewModel;
         _pinItemsSourcePageViewModel = viewModel;
 
+
         map.IsShowingUser = true;
         map.IsScrollEnabled = true;
         map.IsZoomEnabled = true;
