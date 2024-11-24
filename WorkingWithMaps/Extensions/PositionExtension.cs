@@ -1,5 +1,4 @@
-﻿
-using WorkingWithMaps.Dtos;
+﻿using WorkingWithMaps.Dtos;
 using WorkingWithMaps.Models;
 
 namespace WorkingWithMaps.Extensions
@@ -11,7 +10,7 @@ namespace WorkingWithMaps.Extensions
             return new PositionDto
             {
                 Id = position.Id,
-                Latitude = position.Location.Latitude, // A Location osztály tartalmazza az adatokat
+                Latitude = position.Location.Latitude,
                 Longitude = position.Location.Longitude
             };
         }
@@ -21,7 +20,7 @@ namespace WorkingWithMaps.Extensions
             return new Position
             {
                 Id = positionDto.Id,
-                Location = new Location(positionDto.Latitude, positionDto.Longitude) // Létrehozunk egy új Location objektumot
+                Location = new Location(positionDto.Latitude, positionDto.Longitude)
             };
         }
     }

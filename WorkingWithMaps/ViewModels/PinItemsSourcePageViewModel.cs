@@ -19,11 +19,9 @@ public partial class PinItemsSourcePageViewModel : BaseViewModelWithAsyncInitial
     [ObservableProperty]
     private ObservableCollection<Position> _locations = new();
 
-
-    public PinItemsSourcePageViewModel(IClearDriveService? clearDriveService)
+    public PinItemsSourcePageViewModel()
     {
-        _clearDriveService = clearDriveService;
-        
+        _clearDriveService = new ClearDriveService(); 
     }
 
     [RelayCommand]
