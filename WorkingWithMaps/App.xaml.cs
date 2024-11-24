@@ -6,10 +6,10 @@ namespace WorkingWithMaps;
 
 public partial class App : Application
 {
-    public App()
+    public App(IServiceProvider serviceProvider)
     {
         InitializeComponent();
 
-        MainPage = new PinItemsSourcePage();
+        MainPage = serviceProvider.GetRequiredService<PinItemsSourcePage>();
     }
 }

@@ -17,61 +17,72 @@ namespace WorkingWithMaps.Services
 {
     public class ClearDriveService : IClearDriveService
     {
-        private readonly HttpClient _httpClient;
+        private readonly HttpClient? _httpClient;
 
-        public ClearDriveService()
+        // Konstruktor, ami biztosítja az IHttpClientFactory injektálását
+        public ClearDriveService(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = new HttpClient
+            if (httpClientFactory != null)
             {
-                BaseAddress = new Uri("http://10.0.2.2:7090/")
-            };
+                _httpClient = httpClientFactory.CreateClient("ClearDriveApi");
+            }
+            else
+            {
+                Debug.WriteLine("A HttpClientFactory null.");
+            }
         }
 
+        // A SelectAll metódus, amely lekéri a pozíciókat az API-ból
         public async Task<List<Position>> SelectAll()
         {
-            List<PositionDto>? result = await _httpClient.GetFromJsonAsync<List<PositionDto>>("api/Position");
-            if (result != null)
+            if (_httpClient != null)
             {
-                return result.Select(positionDto => positionDto.ToPosition()).ToList();
+                List<PositionDto>? result = await _httpClient.GetFromJsonAsync<List<PositionDto>>("api/Position");
+                if (result != null)
+                {
+                    return result.Select(positionDto => positionDto.ToPosition()).ToList();
+                }
             }
-            
             return new List<Position>();
         }
 
+        // A DeleteAsync metódus, amely töröl egy pozíciót
         public async Task<ControllerResponse> DeleteAsync(Guid id)
         {
             ControllerResponse defaultResponse = new();
 
-            try
+            if (_httpClient != null)
             {
-                HttpResponseMessage httpResponse = await _httpClient.DeleteAsync($"api/Position/{id}");
-                if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
+                try
                 {
-                    string content = await httpResponse.Content.ReadAsStringAsync();
-                    ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
-                    if (response == null)
+                    HttpResponseMessage httpResponse = await _httpClient.DeleteAsync($"api/Position/{id}");
+                    if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
                     {
-                        defaultResponse.ClearAndAddError("A törlés http kérés hibát okozott!");
+                        string content = await httpResponse.Content.ReadAsStringAsync();
+                        ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
+                        if (response == null)
+                        {
+                            defaultResponse.ClearAndAddError("A törlés http kérés hibát okozott!");
+                        }
+                        else
+                        {
+                            return response;
+                        }
+                    }
+                    else if (!httpResponse.IsSuccessStatusCode)
+                    {
+                        httpResponse.EnsureSuccessStatusCode();
                     }
                     else
                     {
-                        return response;
+                        return defaultResponse;
                     }
                 }
-                else if (!httpResponse.IsSuccessStatusCode)
+                catch (Exception ex)
                 {
-                    httpResponse.EnsureSuccessStatusCode();
-                }
-                else
-                {
-                    return defaultResponse;
+                    Debug.WriteLine($"Hiba: {ex.Message}");
                 }
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Hiba: {ex.Message}");
-            }
-            
 
             defaultResponse.ClearAndAddError("Az adatok törlés nem lehetséges!");
             Debug.WriteLine($"{defaultResponse.ToString()}");
@@ -113,7 +124,7 @@ namespace WorkingWithMaps.Services
             {
                 Debug.WriteLine($"Hiba: {ex.Message}");
             }
-            
+
 
             defaultResponse.ClearAndAddError("Az adatok mentése nem lehetséges!");
             Debug.WriteLine($"{defaultResponse.ToString()}");
@@ -121,3 +132,4 @@ namespace WorkingWithMaps.Services
         }
     }
 }
+

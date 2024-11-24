@@ -41,12 +41,12 @@ public partial class PinItemsSourcePage : ContentPage
     private Location deviceLocation;
     private int clicked = 0;
 
-    public PinItemsSourcePage()
+    public PinItemsSourcePage(PinItemsSourcePageViewModel viewModel)
     {
-        _pinItemsSourcePageViewModel = new PinItemsSourcePageViewModel();
         InitializeComponent();
-        BindingContext = _pinItemsSourcePageViewModel;
-        
+        BindingContext = viewModel;
+        _pinItemsSourcePageViewModel = viewModel;
+
 
         map.IsShowingUser = true;
         map.IsScrollEnabled = true;
