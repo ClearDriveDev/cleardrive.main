@@ -139,7 +139,7 @@ public partial class PinItemsSourcePage : ContentPage
         if(deviceLocation != null)
         {
            await _pinItemsSourcePageViewModel.DoSave(new Position(deviceLocation));
-           map.Pins.Add(_pinItemsSourcePageViewModel.CreatePin(deviceLocation));
+           //map.Pins.Add(_pinItemsSourcePageViewModel.CreatePin(deviceLocation));
         }
     }
 }
