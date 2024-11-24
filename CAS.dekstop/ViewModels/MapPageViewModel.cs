@@ -11,6 +11,8 @@ using GMap.NET.WindowsPresentation;
 using System.Drawing;
 using GMap.NET;
 using CAS.desktop.Services;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace CAS.desktop.ViewModels;
 
@@ -89,6 +91,20 @@ public partial class MapPageViewModel : BaseViewModelWithAsyncInitialization
 
     public GMapMarker CreateMarker(PointLatLng temp)
     {
-        return new GMapMarker(temp);
+
+        GMapMarker marker = new GMapMarker(temp);
+
+        Ellipse ellipse = new Ellipse
+        {
+            Width = 20,
+            Height = 20,
+            Fill = Brushes.Red,
+            Stroke = Brushes.Black,
+            StrokeThickness = 2
+        };
+
+        marker.Shape = ellipse;
+
+        return marker;
     }
 }
