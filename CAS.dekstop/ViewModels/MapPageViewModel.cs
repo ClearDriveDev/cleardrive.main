@@ -13,6 +13,10 @@ using GMap.NET;
 using CAS.desktop.Services;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Windows.Media.Imaging;
+using System.Windows.Controls;
+using SharpVectors.Converters;
+using SharpVectors.Renderers;
 
 namespace CAS.desktop.ViewModels;
 
@@ -96,14 +100,33 @@ public partial class MapPageViewModel : BaseViewModelWithAsyncInitialization
 
         Ellipse ellipse = new Ellipse
         {
-            Width = 20,
-            Height = 20,
-            Fill = Brushes.Red,
+            Width = 15,
+            Height = 15,
+            Fill = Brushes.Blue,
             Stroke = Brushes.Black,
             StrokeThickness = 2
         };
 
         marker.Shape = ellipse;
+
+        return marker;
+    }
+
+    public GMapMarker CreatePin(PointLatLng temp)
+    {
+        GMapMarker marker = new GMapMarker(temp);
+
+        Uri svgUri = new Uri("file:///C:/Users/dripp/Desktop/testing/CAS.dekstop/Resources/google_maps_pin.svg");
+
+        SvgViewbox svgViewbox = new SvgViewbox
+        {
+            Width = 35,
+            Height = 35
+        };
+
+        svgViewbox.Load(svgUri);
+
+        marker.Shape = svgViewbox;
 
         return marker;
     }

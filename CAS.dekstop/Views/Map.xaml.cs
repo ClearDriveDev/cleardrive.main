@@ -30,6 +30,7 @@ namespace CAS.dekstop.Views
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             PointLatLng point = new PointLatLng(46.25312, 20.143497);
+            GMapControl.Markers.Add(_mapPageViewModel.CreateMarker(point));
             GMapControl.Position = point;
             GMapControl.Zoom = 15;
 
@@ -37,7 +38,7 @@ namespace CAS.dekstop.Views
             foreach (var item in _mapPageViewModel.Locations)
             {
                 PointLatLng temp = new PointLatLng(item.Latitude, item.Longitude);
-                GMapControl.Markers.Add(_mapPageViewModel.CreateMarker(temp));
+                GMapControl.Markers.Add(_mapPageViewModel.CreatePin(temp));
             }
         }
 
