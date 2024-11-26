@@ -1,4 +1,4 @@
-﻿namespace CAS.backend.Models.Datas.Enums
+﻿namespace WorkingWithMaps.Models.Enums
 {
     public enum StatusType
     {

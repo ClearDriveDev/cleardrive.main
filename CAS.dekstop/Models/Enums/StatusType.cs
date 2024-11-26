@@ -1,4 +1,4 @@
-﻿namespace CAS.backend.Models.Datas.Enums
+﻿namespace CAS.dekstop.Models.Enums
 {
     public enum StatusType
     {

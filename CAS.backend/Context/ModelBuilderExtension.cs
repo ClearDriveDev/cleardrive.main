@@ -8,7 +8,7 @@ namespace CAS.backend.Context
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
-            List<ProblemTicket> ticketList = new List<ProblemTicket> 
+            /*List<ProblemTicket> ticketList = new List<ProblemTicket> 
             {
                 new ProblemTicket()
                 {
@@ -67,7 +67,7 @@ namespace CAS.backend.Context
                     Password = "password",
                     Email = "vasd.das@.com"
                 },
-            };
+            };*/
 
             List<Position> positionList = new List<Position>
             {
@@ -75,20 +75,23 @@ namespace CAS.backend.Context
                 {
                     Id = Guid.NewGuid(),
                     Latitude = 46.252243,
-                    Longitude=20.147692
+                    Longitude=20.147692,
+                    StatusType = StatusType.ToDO
                 },
 
                 new Position()
                 {
                     Id = Guid.NewGuid(),
                     Latitude = 46.253949,
-                    Longitude=20.149033
+                    Longitude=20.149033,
+                    StatusType = StatusType.InProgress
                 },
                 new Position()
                 {
                     Id = Guid.NewGuid(),
                     Latitude = 46.251701, 
-                    Longitude = 20.150803
+                    Longitude = 20.150803,
+                    StatusType = StatusType.Done
                 }
             };
 

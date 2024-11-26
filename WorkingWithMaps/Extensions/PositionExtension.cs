@@ -11,7 +11,8 @@ namespace WorkingWithMaps.Extensions
             {
                 Id = position.Id,
                 Latitude = position.Location.Latitude,
-                Longitude = position.Location.Longitude
+                Longitude = position.Location.Longitude,
+                StatusType = position.StatusType,
             };
         }
 
@@ -20,7 +21,8 @@ namespace WorkingWithMaps.Extensions
             return new Position
             {
                 Id = positionDto.Id,
-                Location = new Location(positionDto.Latitude, positionDto.Longitude)
+                Location = new Location(positionDto.Latitude, positionDto.Longitude),
+                StatusType = positionDto.StatusType,  
             };
         }
     }

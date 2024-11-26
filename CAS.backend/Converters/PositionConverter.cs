@@ -12,6 +12,7 @@ namespace CAS.backend.Converters
                 Id = position.Id,
                 Latitude = position.Latitude,
                 Longitude = position.Longitude,
+                StatusType = position.StatusType
               
             };
         }
@@ -23,6 +24,7 @@ namespace CAS.backend.Converters
                 Id = positionDto.Id,
                 Latitude = positionDto.Latitude,
                 Longitude = positionDto.Longitude,
+                StatusType = positionDto.StatusType
             };
         }
 

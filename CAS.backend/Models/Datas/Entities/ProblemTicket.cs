@@ -9,7 +9,7 @@ namespace CAS.backend.Models.Datas.Entities
         {
             Id = Guid.NewGuid();
             Description = string.Empty;
-            Status = StatusType.Denied;
+            Status = StatusType.Done;
             Problem = ProblemType.RoadProblems;   
         }
 
