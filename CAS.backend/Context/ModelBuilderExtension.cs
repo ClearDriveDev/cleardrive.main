@@ -95,9 +95,9 @@ namespace CAS.backend.Context
                 }
             };
 
-            modelBuilder.Entity<ProblemTicket>().HasData(ticketList);
-            modelBuilder.Entity<User>().HasData(userList);
-            modelBuilder.Entity<Administrator>().HasData(adminList);
+            //modelBuilder.Entity<ProblemTicket>().HasData(ticketList);
+            //modelBuilder.Entity<User>().HasData(userList);
+            //odelBuilder.Entity<Administrator>().HasData(adminList);
             modelBuilder.Entity<Position>().HasData(positionList);
         }
     }
