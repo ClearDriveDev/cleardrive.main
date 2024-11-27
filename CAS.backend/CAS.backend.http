@@ -1,6 +1,2 @@
-@CAS.backend_HostAddress = http://localhost:5291
-
-GET {{CAS.backend_HostAddress}}/weatherforecast/
+@CAS.backend_HostAddress = http://localhost:7090
 Accept: application/json
-
-###
