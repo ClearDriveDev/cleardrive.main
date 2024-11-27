@@ -2,13 +2,13 @@
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using CAS.dekstop.Models;
+using CAS.desktop.Models;
 using System.Net;
 using Newtonsoft.Json;
 using System.Linq;
 using System.Diagnostics;
-using CAS.dekstop.Responses;
-using CAS.dekstop.Services;
+using CAS.desktop.Responses;
+using CAS.desktop.Services;
 
 namespace CAS.desktop.Services
 {

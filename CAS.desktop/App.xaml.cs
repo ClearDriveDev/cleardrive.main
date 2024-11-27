@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace CAS.dekstop
+namespace CAS.desktop
 {
     public partial class App : Application
     {

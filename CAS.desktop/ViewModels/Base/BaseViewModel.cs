@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace CAS.dekstop.ViewModels.Base
+namespace CAS.desktop.ViewModels.Base
 {
     public abstract class BaseViewModel : ObservableObject
     {

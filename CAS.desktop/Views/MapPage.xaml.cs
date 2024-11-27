@@ -6,7 +6,7 @@ using CAS.desktop.ViewModels;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace CAS.dekstop.Views
+namespace CAS.desktop.Views
 {
     public partial class MapPage : Window
     {

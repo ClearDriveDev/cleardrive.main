@@ -1,7 +1,7 @@
-﻿using CAS.dekstop.Responses;
-using CAS.dekstop.Models;
+﻿using CAS.desktop.Responses;
+using CAS.desktop.Models;
 
-namespace CAS.dekstop.Services
+namespace CAS.desktop.Services
 {
     public interface IClearDriveService
     {

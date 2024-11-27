@@ -1,4 +1,4 @@
-﻿namespace CAS.dekstop.Responses
+﻿namespace CAS.desktop.Responses
 {
     public class ControllerResponse : ErrorStore
     {

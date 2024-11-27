@@ -1,6 +1,6 @@
-﻿using CAS.dekstop.Models.Enums;
+﻿using CAS.desktop.Models.Enums;
 
-namespace CAS.dekstop.Models
+namespace CAS.desktop.Models
 {
 
     public class Position

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace CAS.dekstop.ViewModels.Base
+namespace CAS.desktop.ViewModels.Base
 {
     public interface IAsyncInitialization
     {

@@ -13,10 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using CAS.dekstop.Models;
+using CAS.desktop.Models;
 using CAS.desktop.ViewModels;
 
-namespace CAS.dekstop.Views
+namespace CAS.desktop.Views
 {
     public partial class DragAndDropTablePage : UserControl
     {
