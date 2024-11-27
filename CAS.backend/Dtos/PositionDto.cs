@@ -17,6 +17,14 @@ namespace CAS.backend.Dtos
             StatusType = statusType;
         }
 
+        public PositionDto(double latitude, double longitude)
+        {
+            Id = Guid.NewGuid();
+            Latitude = latitude;
+            Longitude = longitude;
+            StatusType = StatusType.ToDO;
+        }
+
         public PositionDto()
         {
             Id = Guid.NewGuid();

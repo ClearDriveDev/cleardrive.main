@@ -28,7 +28,8 @@ namespace CAS.backend.Controllers
                 {
                     Id = entity.Id,
                     Latitude = entity.Latitude,
-                    Longitude = entity.Longitude
+                    Longitude = entity.Longitude,
+                    StatusType=entity.StatusType
                 };
                 return Ok(positionDto); 
             }
@@ -44,7 +45,8 @@ namespace CAS.backend.Controllers
                 {
                     Id = positionDto.Id,
                     Latitude = positionDto.Latitude,
-                    Longitude = positionDto.Longitude
+                    Longitude = positionDto.Longitude,
+                    StatusType=positionDto.StatusType
                 };
 
                 ControllerResponse response = await _posRepo.InsertAsync(position);
@@ -71,7 +73,8 @@ namespace CAS.backend.Controllers
             {
                 Id = position.Id,
                 Latitude = position.Latitude,
-                Longitude = position.Longitude
+                Longitude = position.Longitude,
+                StatusType=position.StatusType
             }).ToList();
 
             return Ok(positionDtos); 
@@ -84,7 +87,8 @@ namespace CAS.backend.Controllers
             {
                 Id = entity.Id,
                 Latitude = entity.Latitude,
-                Longitude = entity.Longitude
+                Longitude = entity.Longitude,
+                StatusType= entity.StatusType
             };
 
             ControllerResponse response = await _posRepo.UpdatePositionAsync(position);
