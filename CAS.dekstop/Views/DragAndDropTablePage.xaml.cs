@@ -18,7 +18,7 @@ using CAS.desktop.ViewModels;
 
 namespace CAS.dekstop.Views
 {
-    public partial class DragAndDropTable : UserControl
+    public partial class DragAndDropTablePage : UserControl
     {
         private DragAndDropTableViewModel _dragAndDropTableViewModel;
 
@@ -26,7 +26,9 @@ namespace CAS.dekstop.Views
         private ObservableCollection<Position> InProgressItems = new();
         private ObservableCollection<Position> DoneItems = new();
 
-        public DragAndDropTable()
+        //private bool _isDragging = false;
+
+        public DragAndDropTablePage()
         {
             InitializeComponent();
             _dragAndDropTableViewModel = new DragAndDropTableViewModel();
@@ -76,10 +78,8 @@ namespace CAS.dekstop.Views
 
             if (draggedItem != null)
             {
-                // Először töröljük az elemet a régi listából
                 RemoveItemFromOtherLists(draggedItem);
 
-                // Hozzáadjuk az elemet a megfelelő listához
                 if (targetListView == ToDoListView)
                 {
                     draggedItem.StatusType = Models.Enums.StatusType.ToDO;
@@ -115,6 +115,7 @@ namespace CAS.dekstop.Views
             await _dragAndDropTableViewModel.DoUpdate(item);
             MessageBox.Show($"Item status updated to: {item.StatusType}");
         }
+        private bool _isDragging = false;
 
         private void ListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -124,10 +125,53 @@ namespace CAS.dekstop.Views
                 var draggedItem = listViewItem.DataContext as Position;
                 if (draggedItem != null)
                 {
+                    // Jelöljük, hogy most egy drag műveletet kezdünk
+                    _isDragging = true;
+
+                    // A drag műveletet csak akkor indítjuk el, ha az item valóban létezik
                     DragDrop.DoDragDrop(listViewItem, draggedItem, DragDropEffects.Move);
                 }
             }
         }
+
+        private void ListView_PreviewMouseMove(object sender, MouseEventArgs e)
+        {
+            // Ellenőrizzük, hogy a flag be van-e állítva
+            if (_isDragging)
+            {
+                var listViewItem = GetListViewItem(sender as ListView, e);
+                if (listViewItem != null)
+                {
+                    var draggedItem = listViewItem.DataContext as Position;
+                    if (draggedItem != null)
+                    {
+                        // Ha valóban egy elem van, elindítjuk a drag-and-drop műveletet
+                        DragDrop.DoDragDrop(listViewItem, draggedItem, DragDropEffects.Move);
+                        _isDragging = false;  // Reset
+                    }
+                }
+            }
+        }
+
+        private void ListView_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            // Ha felengedtük az egeret, akkor a drag véget ért
+            _isDragging = false;
+        }
+
+        // A GetListViewItem metódus változtatása:
+        private ListViewItem GetListViewItem(ListView listView, MouseEventArgs e)
+        {
+            var element = e.OriginalSource as DependencyObject;
+            while (element != null && !(element is ListViewItem))
+            {
+                element = VisualTreeHelper.GetParent(element);
+            }
+            return element as ListViewItem;
+        }
+
+
+
 
         private ListViewItem GetListViewItem(ListView listView, MouseButtonEventArgs e)
         {

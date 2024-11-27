@@ -8,11 +8,11 @@ using System.Windows.Shapes;
 
 namespace CAS.dekstop.Views
 {
-    public partial class Map : Window
+    public partial class MapPage : Window
     {
 
         private MapPageViewModel _mapPageViewModel;
-        public Map()
+        public MapPage()
         {
             InitializeComponent();
             
