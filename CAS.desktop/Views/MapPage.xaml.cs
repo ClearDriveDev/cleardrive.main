@@ -24,7 +24,7 @@ namespace CAS.desktop.Views
             GMapControl.MaxZoom = 18;
             GMapControl.MinZoom = 5;
             GMapControl.Manager.Mode = AccessMode.ServerAndCache;
-            GMapControl.CacheLocation = @"C:\Temp\GMapCache";  
+            GMapControl.CacheLocation = @"C:\Windows\Temp";  
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
