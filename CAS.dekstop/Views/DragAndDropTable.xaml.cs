@@ -13,108 +13,122 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CAS.dekstop.Models;
+using CAS.desktop.ViewModels;
 
 namespace CAS.dekstop.Views
 {
     public partial class DragAndDropTable : UserControl
     {
-        public ObservableCollection<TaskItem> ToDoItems { get; set; }
-        public ObservableCollection<TaskItem> InProgressItems { get; set; }
-        public ObservableCollection<TaskItem> DoneItems { get; set; }
+        private DragAndDropTableViewModel _dragAndDropTableViewModel;
+
+        private ObservableCollection<Position> ToDoItems = new();
+        private ObservableCollection<Position> InProgressItems = new();
+        private ObservableCollection<Position> DoneItems = new();
 
         public DragAndDropTable()
         {
             InitializeComponent();
-            LoadData();
-            DataContext = this;
+            _dragAndDropTableViewModel = new DragAndDropTableViewModel();
+            DataContext = _dragAndDropTableViewModel;
         }
 
-        private void LoadData()
+        private async Task LoadData()
         {
-            
+            await _dragAndDropTableViewModel.UpdateView();
+            foreach (var item in _dragAndDropTableViewModel.Locations)
+            {
+                if (item.StatusType == Models.Enums.StatusType.ToDO)
+                {
+                    ToDoItems.Add(item);
+                }
+                else if (item.StatusType == Models.Enums.StatusType.InProgress)
+                {
+                    InProgressItems.Add(item);
+                }
+                else
+                {
+                    DoneItems.Add(item);
+                }
+            }
+        }
 
-            InProgressItems = new ObservableCollection<TaskItem>();
-            DoneItems = new ObservableCollection<TaskItem>();
-
+        public void UpdateTable()
+        {
             ToDoListView.ItemsSource = ToDoItems;
             InProgressListView.ItemsSource = InProgressItems;
             DoneListView.ItemsSource = DoneItems;
         }
 
-        // DragOver esemény, hogy a céllistában elfogadja a húzott elemeket
         private void ListView_PreviewDragOver(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(typeof(TaskItem)))
+            if (e.Data.GetDataPresent(typeof(Position)))
             {
                 e.Effects = DragDropEffects.Move;
                 e.Handled = true;
             }
         }
 
-        // Drop esemény, amikor az elemet a másik listára húzzuk
         private void ListView_Drop(object sender, DragEventArgs e)
         {
             var targetListView = sender as ListView;
-            var draggedItem = e.Data.GetData(typeof(TaskItem)) as TaskItem;
+            var draggedItem = e.Data.GetData(typeof(Position)) as Position;
 
             if (draggedItem != null)
             {
-                // A cél listától függően módosítjuk az item státuszát
+                // Először töröljük az elemet a régi listából
+                RemoveItemFromOtherLists(draggedItem);
+
+                // Hozzáadjuk az elemet a megfelelő listához
                 if (targetListView == ToDoListView)
                 {
-                    draggedItem.Status = "To Do";
+                    draggedItem.StatusType = Models.Enums.StatusType.ToDO;
                     ToDoItems.Add(draggedItem);
                 }
                 else if (targetListView == InProgressListView)
                 {
-                    draggedItem.Status = "In Progress";
+                    draggedItem.StatusType = Models.Enums.StatusType.InProgress;
                     InProgressItems.Add(draggedItem);
                 }
                 else if (targetListView == DoneListView)
                 {
-                    draggedItem.Status = "Done";
+                    draggedItem.StatusType = Models.Enums.StatusType.Done;
                     DoneItems.Add(draggedItem);
                 }
 
-                // Eltávolítjuk az elemet az eredeti listából
-                RemoveItemFromOtherLists(draggedItem);
-
-                // Backend frissítés (pl. API hívás)
                 UpdateBackendStatus(draggedItem);
             }
         }
 
-        private void RemoveItemFromOtherLists(TaskItem item)
+        private void RemoveItemFromOtherLists(Position item)
         {
-            // Ellenőrizzük, hogy az elem valóban létezik az adott listákban
-            if (ToDoItems.Contains(item)) ToDoItems.Remove(item);
-            if (InProgressItems.Contains(item)) InProgressItems.Remove(item);
-            if (DoneItems.Contains(item)) DoneItems.Remove(item);
+            if (ToDoItems.Contains(item))
+                ToDoItems.Remove(item);
+            if (InProgressItems.Contains(item))
+                InProgressItems.Remove(item);
+            if (DoneItems.Contains(item))
+                DoneItems.Remove(item);
         }
 
-        private void UpdateBackendStatus(TaskItem item)
+        private async void UpdateBackendStatus(Position item)
         {
-            // Backend kommunikáció szimulálása
-            // Itt kell API hívást végezni, hogy a backend adatai is frissüljenek
-            MessageBox.Show($"Item status updated to: {item.Status}");
+            await _dragAndDropTableViewModel.DoUpdate(item);
+            MessageBox.Show($"Item status updated to: {item.StatusType}");
         }
 
-        // Az elemek húzásának kezdeményezése (mouse left button down)
         private void ListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var listViewItem = GetListViewItem(sender as ListView, e);
             if (listViewItem != null)
             {
-                var draggedItem = listViewItem.DataContext as TaskItem;
+                var draggedItem = listViewItem.DataContext as Position;
                 if (draggedItem != null)
                 {
-                    // Csak akkor induljon el a drag-and-drop, ha ténylegesen elhúzzák az elemet
                     DragDrop.DoDragDrop(listViewItem, draggedItem, DragDropEffects.Move);
                 }
             }
         }
 
-        // Segédfüggvény a ListViewItem megtalálásához
         private ListViewItem GetListViewItem(ListView listView, MouseButtonEventArgs e)
         {
             var element = e.OriginalSource as DependencyObject;
@@ -124,6 +138,12 @@ namespace CAS.dekstop.Views
             }
             return element as ListViewItem;
         }
+
+        private async void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            await _dragAndDropTableViewModel.InitializeAsync();
+            await LoadData();
+            UpdateTable();
+        }
     }
 }
-

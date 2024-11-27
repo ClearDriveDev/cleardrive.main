@@ -36,6 +36,43 @@ namespace CAS.desktop.Services
         return new List<Position>();
         }
 
+        public async Task<ControllerResponse> UpdateAsync(Position position)
+        {
+            ControllerResponse defaultResponse = new();
+            if (_httpClient is not null)
+            {
+                try
+                {
+                    HttpResponseMessage httpResponse = await _httpClient.PutAsJsonAsync("api/Position", position);
+                    if (httpResponse.StatusCode == HttpStatusCode.BadRequest)
+                    {
+                        string content = await httpResponse.Content.ReadAsStringAsync();
+                        ControllerResponse? response = JsonConvert.DeserializeObject<ControllerResponse>(content);
+                        if (response is null)
+                        {
+                            defaultResponse.ClearAndAddError("A törlés http kérés hibát okozott!");
+                        }
+                        else return response;
+                    }
+                    else if (!httpResponse.IsSuccessStatusCode)
+                    {
+                        httpResponse.EnsureSuccessStatusCode();
+                    }
+                    else
+                    {
+                        return defaultResponse;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"{ex.Message}");
+                }
+            }
+            defaultResponse.ClearAndAddError("Az adatok frissítés nem lehetséges!");
+            return defaultResponse;
+        }
+
         public async Task<ControllerResponse> DeleteAsync(Guid id)
         {
             ControllerResponse defaultResponse = new();
