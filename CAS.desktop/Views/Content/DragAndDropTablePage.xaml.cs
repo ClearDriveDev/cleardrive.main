@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 using CAS.desktop.Models;
 using CAS.desktop.ViewModels;
 
-namespace CAS.desktop.Views
+namespace CAS.desktop.Views.Content
 {
     public partial class DragAndDropTablePage : UserControl
     {

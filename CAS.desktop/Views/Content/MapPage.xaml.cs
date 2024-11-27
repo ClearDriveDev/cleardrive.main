@@ -5,10 +5,11 @@ using GMap.NET.WindowsPresentation;
 using CAS.desktop.ViewModels;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Windows.Controls;
 
-namespace CAS.desktop.Views
+namespace CAS.desktop.Views.Content
 {
-    public partial class MapPage : Window
+    public partial class MapPage : UserControl
     {
 
         private MapPageViewModel _mapPageViewModel;
