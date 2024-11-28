@@ -48,23 +48,4 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="System.ObjectModel" Version="4.3.0" />
 	</ItemGroup>
-	<ItemGroup>
-		<MauiXaml Update="Platforms\Windows\App.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Resources\Styles\Colors.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Resources\Styles\Styles.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\PinItemsSourcePage.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Remove="Templates\" />
-	</ItemGroup>
-
 </Project>
