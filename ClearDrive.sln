@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearDrive.backend", "Clear
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearDrive.desktop", "ClearDrive.desktop\ClearDrive.desktop.csproj", "{5263FBD3-F375-4EA1-9A3C-9BFCDD69EE72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearDrive.mobil", "ClearDrive.mobil\ClearDrive.mobil.csproj", "{83C30A38-BE51-48D8-B74A-AF34AB9D5069}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearDrive.mobil", "ClearDrive.mobil\ClearDrive.mobil.csproj", "{7398EA25-A149-4AAD-8A18-FDD0B8C9E69B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{5263FBD3-F375-4EA1-9A3C-9BFCDD69EE72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5263FBD3-F375-4EA1-9A3C-9BFCDD69EE72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5263FBD3-F375-4EA1-9A3C-9BFCDD69EE72}.Release|Any CPU.Build.0 = Release|Any CPU
-		{83C30A38-BE51-48D8-B74A-AF34AB9D5069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{83C30A38-BE51-48D8-B74A-AF34AB9D5069}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{83C30A38-BE51-48D8-B74A-AF34AB9D5069}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{83C30A38-BE51-48D8-B74A-AF34AB9D5069}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7398EA25-A149-4AAD-8A18-FDD0B8C9E69B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7398EA25-A149-4AAD-8A18-FDD0B8C9E69B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7398EA25-A149-4AAD-8A18-FDD0B8C9E69B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7398EA25-A149-4AAD-8A18-FDD0B8C9E69B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
