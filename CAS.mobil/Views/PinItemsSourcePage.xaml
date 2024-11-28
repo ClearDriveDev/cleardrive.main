@@ -18,12 +18,6 @@
             <StackLayout Orientation="Horizontal"
                          HorizontalOptions="Center">
                 <StackLayout Orientation="Horizontal"
-                             HorizontalOptions="Center"
-                             Spacing="30">
-                    <Button Text="Street/Satellite"
-                        Clicked="OnViewButtonClicked" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal"
              HorizontalOptions="Center"
              Spacing="30">
                 <Button Text="Kuldes"
@@ -35,6 +29,12 @@
                     <Button Text="Aktualis helyzet kuldese" Clicked="ActualLocationSend"/>
                     <!--<Button Text="Remove"
                      Clicked="RemoveButton"/>-->
+                </StackLayout>
+                <StackLayout Orientation="Horizontal"
+             HorizontalOptions="Center"
+             Spacing="30">
+                    <Button Text="Utca/Muhold"
+        Clicked="OnViewButtonClicked" />
                 </StackLayout>
             </StackLayout>
         </ScrollView>

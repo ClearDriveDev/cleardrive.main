@@ -13,7 +13,7 @@ namespace CAS.backend.Extensions
                  option.AddPolicy(name: "CASCors",
                      policy =>
                      {
-                         policy.WithOrigins("https://localhost:7090/")
+                         policy.WithOrigins("http://localhost:7090/")
                          .AllowAnyHeader()
                          .AllowAnyMethod();
                      }

@@ -20,7 +20,7 @@ namespace CAS.desktop.Services
         {
             _httpClient = new HttpClient
             {
-                BaseAddress = new Uri("https://localhost:7090/") 
+                BaseAddress = new Uri("http://localhost:7090/") 
             };
         }
 

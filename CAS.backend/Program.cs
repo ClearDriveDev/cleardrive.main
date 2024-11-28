@@ -14,7 +14,7 @@ builder.Services.AddControllers();
 builder.Services.ConfigureCors();
 builder.Services.ConfigureInMemoryContext();
 builder.Services.ConfigureRepos();
-builder.WebHost.UseUrls("https://0.0.0.0:7090");
+builder.WebHost.UseUrls("http://0.0.0.0:7090");
 
 
 
@@ -34,7 +34,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseCors("CASCors");
 
