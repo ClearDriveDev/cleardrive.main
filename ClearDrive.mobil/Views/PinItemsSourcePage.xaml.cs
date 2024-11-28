@@ -88,23 +88,30 @@ namespace ClearDrive.mobil.Views
         {
             if (_currentLocation != null)
             {
-                Position temp = new Position(new Location(_currentLocation.Latitude, _currentLocation.Longitude));
-                await _pinItemsSourcePageViewModel.DoSave(temp);
-                map.Pins.Add(_pinItemsSourcePageViewModel.CreatePin(_currentLocation));
+                bool tempHa;
+                foreach (var item in _pinItemsSourcePageViewModel.Locations)
+                {
+                   tempHa = _pinItemsSourcePageViewModel.GetDistance(_currentLocation, item.Location);
+                    if (!tempHa)
+                    {
+                        Position temp = new Position(new Location(_currentLocation.Latitude, _currentLocation.Longitude));
+                        await _pinItemsSourcePageViewModel.DoSave(temp);
+                        map.Pins.Add(_pinItemsSourcePageViewModel.CreatePin(_currentLocation));
+                    }
+                    else
+                    {
+                       Position novelt = item.Priority++;
+                        await _pinItemsSourcePageViewModel.DoUpdate(novelt);
+                    }
+                    
+                }
+
             }
             else
             {
                 await DisplayAlert("Figyelem!", "Nincs helyzet megadva!", "Ok");
             }
         }
-
-        /*private void RemoveButton(object sender, EventArgs e)
-        {
-           //int latitude = map.Pins.Select(s=> int(s.Location.Latitude));
-
-
-            _currentLocation = null;
-        }*/
 
         private void OnViewButtonClicked(object sender, EventArgs e)
         {

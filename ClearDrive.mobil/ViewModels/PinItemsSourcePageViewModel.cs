@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using ClearDrive.mobil.Extensions;
 using System.Diagnostics;
 using ClearDrive.mobil.Responses;
+using Microsoft.Maui.Maps;
 
 namespace ClearDrive.mobil.ViewModels
 {
@@ -31,6 +32,29 @@ namespace ClearDrive.mobil.ViewModels
             if (_clearDriveService is not null)
             {
                 ControllerResponse result = await _clearDriveService.InsertAsync(newPosition);
+                if (!result.HasError)
+                {
+                    await UpdateView();
+                }
+                else
+                {
+                    Debug.WriteLine($"{result.ToString()}");
+                }
+            }
+            else
+            {
+                Debug.WriteLine($"{nameof(_clearDriveService)} is null.");
+            }
+        }
+
+        [RelayCommand]
+        public async Task DoUpdate(Position positionToUpdate)
+        {
+            if (_clearDriveService is not null)
+            {
+
+                ControllerResponse result = await _clearDriveService.UpdateAsync(positionToUpdate);
+
                 if (!result.HasError)
                 {
                     await UpdateView();
@@ -94,6 +118,19 @@ namespace ClearDrive.mobil.ViewModels
                 Address = ((float)temp.Longitude).ToString() + ", " + ((float)temp.Latitude).ToString(),
                 Type = PinType.SavedPin
             };
+        }
+
+        public bool GetDistance( Location location1, Location location2)
+        {
+            var R = 6371; // Earth radius in km
+            var dLat = (location2.Latitude - location1.Latitude) * Math.PI / 180;
+            var dLon = (location2.Longitude - location1.Longitude) * Math.PI / 180;
+            var a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+                    Math.Cos(location1.Latitude * Math.PI / 180) * Math.Cos(location2.Latitude * Math.PI / 180) *
+                    Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
+            var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+            var distance = R * c * 1000; // Distance in meters
+            return distance<=10 ? true : false;
         }
     }
 }
