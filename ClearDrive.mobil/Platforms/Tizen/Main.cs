@@ -2,7 +2,7 @@ using System;
 using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 
-namespace CAS.mobil;
+namespace ClearDrive.mobil;
 
 class Program : MauiApplication
 {

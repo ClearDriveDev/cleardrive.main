@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearDrive.backend", "Clear
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAS.desktop", "ClearDrive.desktop\CAS.desktop.csproj", "{5263FBD3-F375-4EA1-9A3C-9BFCDD69EE72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAS.mobil", "ClearDrive.mobil\CAS.mobil.csproj", "{83C30A38-BE51-48D8-B74A-AF34AB9D5069}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearDrive.mobil", "ClearDrive.mobil\ClearDrive.mobil.csproj", "{83C30A38-BE51-48D8-B74A-AF34AB9D5069}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
