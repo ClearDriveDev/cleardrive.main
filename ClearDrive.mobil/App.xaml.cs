@@ -2,14 +2,16 @@
 using Microsoft.Maui.Controls;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ClearDrive.mobil;
-
-public partial class App : Application
+namespace ClearDrive.mobil
 {
-    public App(IServiceProvider serviceProvider)
-    {
-        InitializeComponent();
 
-        MainPage = serviceProvider.GetRequiredService<PinItemsSourcePage>();
+    public partial class App : Application
+    {
+        public App(IServiceProvider serviceProvider)
+        {
+            InitializeComponent();
+
+            MainPage = serviceProvider.GetRequiredService<PinItemsSourcePage>();
+        }
     }
 }

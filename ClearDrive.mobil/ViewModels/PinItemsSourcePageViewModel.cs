@@ -10,89 +10,90 @@ using ClearDrive.mobil.Extensions;
 using System.Diagnostics;
 using ClearDrive.mobil.Responses;
 
-namespace ClearDrive.mobil.ViewModels;
-
-public partial class PinItemsSourcePageViewModel : BaseViewModelWithAsyncInitialization
+namespace ClearDrive.mobil.ViewModels
 {
-    private readonly IClearDriveService? _clearDriveService;
-
-    [ObservableProperty]
-    private ObservableCollection<Position> _locations = new();
-
-    public PinItemsSourcePageViewModel(IClearDriveService? clearDriveService)
+    public partial class PinItemsSourcePageViewModel : BaseViewModelWithAsyncInitialization
     {
-        _clearDriveService = clearDriveService;
+        private readonly IClearDriveService? _clearDriveService;
 
-    }
+        [ObservableProperty]
+        private ObservableCollection<Position> _locations = new();
 
-    [RelayCommand]
-    public async Task DoSave(Position newPosition)
-    {
-        if (_clearDriveService is not null)
+        public PinItemsSourcePageViewModel(IClearDriveService? clearDriveService)
         {
-            ControllerResponse result = await _clearDriveService.InsertAsync(newPosition);
-            if (!result.HasError)
+            _clearDriveService = clearDriveService;
+
+        }
+
+        [RelayCommand]
+        public async Task DoSave(Position newPosition)
+        {
+            if (_clearDriveService is not null)
             {
-                await UpdateView();
+                ControllerResponse result = await _clearDriveService.InsertAsync(newPosition);
+                if (!result.HasError)
+                {
+                    await UpdateView();
+                }
+                else
+                {
+                    Debug.WriteLine($"{result.ToString()}");
+                }
             }
             else
             {
-                Debug.WriteLine($"{result.ToString()}");
+                Debug.WriteLine($"{nameof(_clearDriveService)} is null.");
             }
         }
-        else
-        {
-            Debug.WriteLine($"{nameof(_clearDriveService)} is null.");
-        }
-    }
 
-    [RelayCommand]
-    public async Task DoRemove(Position positionToDelete)
-    {
-        if (_clearDriveService is not null)
+        [RelayCommand]
+        public async Task DoRemove(Position positionToDelete)
         {
-            ControllerResponse result = await _clearDriveService.DeleteAsync(positionToDelete.Id);
-            if (!result.HasError)
+            if (_clearDriveService is not null)
             {
-                await UpdateView();
+                ControllerResponse result = await _clearDriveService.DeleteAsync(positionToDelete.Id);
+                if (!result.HasError)
+                {
+                    await UpdateView();
+                }
+                else
+                {
+                    Debug.WriteLine($"{result.ToString()}");
+                }
             }
             else
             {
-                Debug.WriteLine($"{result.ToString()}");
+                Debug.WriteLine($"{nameof(_clearDriveService)} is null.");
             }
         }
-        else
-        {
-            Debug.WriteLine($"{nameof(_clearDriveService)} is null.");
-        }
-    }
 
-    public override async Task InitializeAsync()
-    {
-        await UpdateView();
-    }
-
-    public async Task UpdateView()
-    {
-        if (_clearDriveService is not null)
+        public override async Task InitializeAsync()
         {
-            List<Position> positions = await _clearDriveService.SelectAll();
-            Locations = new ObservableCollection<Position>(positions);
+            await UpdateView();
         }
-        else
-        {
-            Debug.WriteLine($"{nameof(_clearDriveService)} is null.");
-        }
-    }
 
-    public Pin CreatePin(Location temp)
-    {
-        return new Pin
+        public async Task UpdateView()
         {
-            Location = temp,
-            Label = temp.Timestamp.Year.ToString() + "." + temp.Timestamp.Month.ToString() + "." + temp.Timestamp.Day.ToString() + "  " + temp.Timestamp.Hour.ToString() + ":" + temp.Timestamp.Minute.ToString() + ":" + temp.Timestamp.Second.ToString(),
-            Address = ((float)temp.Longitude).ToString() + ", " + ((float)temp.Latitude).ToString(),
-            Type = PinType.SavedPin
-        };
+            if (_clearDriveService is not null)
+            {
+                List<Position> positions = await _clearDriveService.SelectAll();
+                Locations = new ObservableCollection<Position>(positions);
+            }
+            else
+            {
+                Debug.WriteLine($"{nameof(_clearDriveService)} is null.");
+            }
+        }
+
+        public Pin CreatePin(Location temp)
+        {
+            return new Pin
+            {
+                Location = temp,
+                Label = temp.Timestamp.Year.ToString() + "." + temp.Timestamp.Month.ToString() + "." + temp.Timestamp.Day.ToString() + "  " + temp.Timestamp.Hour.ToString() + ":" + temp.Timestamp.Minute.ToString() + ":" + temp.Timestamp.Second.ToString(),
+                Address = ((float)temp.Longitude).ToString() + ", " + ((float)temp.Latitude).ToString(),
+                Type = PinType.SavedPin
+            };
+        }
     }
 }
