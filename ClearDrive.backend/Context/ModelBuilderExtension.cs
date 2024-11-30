@@ -76,7 +76,8 @@ namespace ClearDrive.backend.Context
                     Id = Guid.NewGuid(),
                     Latitude = 46.252243,
                     Longitude=20.147692,
-                    StatusType = StatusType.ToDO
+                    StatusType = StatusType.ToDO,
+                    Priority = 0,
                 },
 
                 new Position()
@@ -84,14 +85,16 @@ namespace ClearDrive.backend.Context
                     Id = Guid.NewGuid(),
                     Latitude = 46.253949,
                     Longitude=20.149033,
-                    StatusType = StatusType.InProgress
+                    StatusType = StatusType.InProgress,
+                    Priority = 0,
                 },
                 new Position()
                 {
                     Id = Guid.NewGuid(),
                     Latitude = 46.251701, 
                     Longitude = 20.150803,
-                    StatusType = StatusType.Done
+                    StatusType = StatusType.Done,
+                    Priority = 0,
                 }
             };
 

@@ -29,7 +29,8 @@ namespace ClearDrive.backend.Controllers
                     Id = entity.Id,
                     Latitude = entity.Latitude,
                     Longitude = entity.Longitude,
-                    StatusType=entity.StatusType
+                    StatusType=entity.StatusType,
+                    Priority = entity.Priority
                 };
                 return Ok(positionDto); 
             }
@@ -46,7 +47,8 @@ namespace ClearDrive.backend.Controllers
                     Id = positionDto.Id,
                     Latitude = positionDto.Latitude,
                     Longitude = positionDto.Longitude,
-                    StatusType=positionDto.StatusType
+                    StatusType=positionDto.StatusType,
+                    Priority = positionDto.Priority
                 };
 
                 ControllerResponse response = await _posRepo.InsertAsync(position);
@@ -74,7 +76,8 @@ namespace ClearDrive.backend.Controllers
                 Id = position.Id,
                 Latitude = position.Latitude,
                 Longitude = position.Longitude,
-                StatusType=position.StatusType
+                StatusType=position.StatusType,
+                Priority = position.Priority
             }).ToList();
 
             return Ok(positionDtos); 
@@ -88,7 +91,8 @@ namespace ClearDrive.backend.Controllers
                 Id = entity.Id,
                 Latitude = entity.Latitude,
                 Longitude = entity.Longitude,
-                StatusType= entity.StatusType
+                StatusType= entity.StatusType,
+                Priority = entity.Priority
             };
 
             ControllerResponse response = await _posRepo.UpdatePositionAsync(position);

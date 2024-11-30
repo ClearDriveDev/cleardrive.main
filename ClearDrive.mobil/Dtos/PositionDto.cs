@@ -13,13 +13,15 @@ namespace ClearDrive.mobil.Dtos
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public StatusType StatusType { get; set; }
+        public int Priority { get; set; }
 
-        public PositionDto(Guid id, double latitude, double longitude, StatusType statusType)
+        public PositionDto(Guid id, double latitude, double longitude, StatusType statusType, int priority)
         {
             Id = id;
             Latitude = latitude;
             Longitude = longitude;
             StatusType = statusType;
+            Priority = priority;
         }
 
         public PositionDto()
@@ -28,6 +30,7 @@ namespace ClearDrive.mobil.Dtos
             Latitude = 0;
             Longitude = 0;
             StatusType = StatusType.ToDO;
+            Priority = 0;
         }
     }
 }

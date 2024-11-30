@@ -12,8 +12,9 @@ namespace ClearDrive.backend.Converters
                 Id = position.Id,
                 Latitude = position.Latitude,
                 Longitude = position.Longitude,
-                StatusType = position.StatusType
-              
+                StatusType = position.StatusType,
+                Priority = position.Priority
+
             };
         }
 
@@ -24,7 +25,8 @@ namespace ClearDrive.backend.Converters
                 Id = positionDto.Id,
                 Latitude = positionDto.Latitude,
                 Longitude = positionDto.Longitude,
-                StatusType = positionDto.StatusType
+                StatusType = positionDto.StatusType,
+                Priority = positionDto.Priority
             };
         }
 

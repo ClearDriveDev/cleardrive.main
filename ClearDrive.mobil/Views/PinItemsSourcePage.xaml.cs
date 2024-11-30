@@ -100,7 +100,7 @@ namespace ClearDrive.mobil.Views
                     }
                     else
                     {
-                       Position novelt = item.Priority++;
+                        Position novelt = item.Priority++;
                         await _pinItemsSourcePageViewModel.DoUpdate(novelt);
                     }
                     

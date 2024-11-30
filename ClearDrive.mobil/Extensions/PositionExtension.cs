@@ -13,6 +13,7 @@ namespace ClearDrive.mobil.Extensions
                 Latitude = position.Location.Latitude,
                 Longitude = position.Location.Longitude,
                 StatusType = position.StatusType,
+                Priority = position.Priority,
             };
         }
 
@@ -22,7 +23,8 @@ namespace ClearDrive.mobil.Extensions
             {
                 Id = positionDto.Id,
                 Location = new Location(positionDto.Latitude, positionDto.Longitude),
-                StatusType = positionDto.StatusType,  
+                StatusType = positionDto.StatusType,
+                Priority = positionDto.Priority
             };
         }
     }
