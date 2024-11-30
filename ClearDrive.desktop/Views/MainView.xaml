@@ -12,7 +12,7 @@
         AllowsTransparency="True">
 
     <Grid>
-        <Border Background="#1C1D31"
+        <Border Background="#8C0D31"
                 CornerRadius="25" />
 
         <Grid>
@@ -61,10 +61,10 @@
                     <LinearGradientBrush StartPoint="0.75,0"
                                          EndPoint="0,1">
 
-                        <GradientStop Color="#DF208F"
+                        <GradientStop Color="GreenYellow"
                                       Offset="0.1" />
 
-                        <GradientStop Color="#DFCF20"
+                        <GradientStop Color="Orange"
                                       Offset="0.8" />
 
                     </LinearGradientBrush>
@@ -84,7 +84,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Border Grid.Column="1"
-                        Background="#323345"
+                        Background="#221335"
                         CornerRadius="10,10,0,0"
                         Margin="0,85,0,0">
 
@@ -207,7 +207,7 @@
                     x:Name="MinimizeBtn"
                     Style="{StaticResource MinimizeBtnStyle}"
                     Click="btnMinimize_Click" />
-            
+
             <Button Margin="0,40,80,0"
                     x:Name="MaximizeBtn"
                     Style="{StaticResource MaximizeBtnStyle}"
@@ -216,8 +216,6 @@
             <Button x:Name="ExitBtn"
                     Style="{StaticResource CloseBtnStyle}"
                     Click="btnClose_Click" />
-
         </Grid>
-
     </Grid>
 </Window>
