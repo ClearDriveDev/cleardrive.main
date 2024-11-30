@@ -77,7 +77,7 @@ namespace ClearDrive.backend.Context
                     Latitude = 46.252243,
                     Longitude=20.147692,
                     StatusType = StatusType.ToDO,
-                    Priority = 0,
+                    Priority = 1
                 },
 
                 new Position()
@@ -86,7 +86,7 @@ namespace ClearDrive.backend.Context
                     Latitude = 46.253949,
                     Longitude=20.149033,
                     StatusType = StatusType.InProgress,
-                    Priority = 0,
+                    Priority = 1
                 },
                 new Position()
                 {
@@ -94,7 +94,7 @@ namespace ClearDrive.backend.Context
                     Latitude = 46.251701, 
                     Longitude = 20.150803,
                     StatusType = StatusType.Done,
-                    Priority = 0,
+                    Priority = 1
                 }
             };
 

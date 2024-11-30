@@ -83,27 +83,35 @@ namespace ClearDrive.mobil.Views
             }
 
         }
-
+        
         private async void AddButton(object sender, EventArgs e)
         {
+            Position positionToUpdate=new();
+            bool tempHa = false;
             if (_currentLocation != null)
             {
-                bool tempHa;
-                foreach (var item in _pinItemsSourcePageViewModel.Locations)
+                
+                foreach (Position item in _pinItemsSourcePageViewModel.Locations)
                 {
-                   tempHa = _pinItemsSourcePageViewModel.GetDistance(_currentLocation, item.Location);
-                    if (!tempHa)
+                    tempHa = _pinItemsSourcePageViewModel.GetDistance(_currentLocation, item.Location);
+                    if (tempHa) 
                     {
-                        Position temp = new Position(new Location(_currentLocation.Latitude, _currentLocation.Longitude));
-                        await _pinItemsSourcePageViewModel.DoSave(temp);
-                        map.Pins.Add(_pinItemsSourcePageViewModel.CreatePin(_currentLocation));
-                    }
-                    else
-                    {
-                        Position novelt = item.Priority++;
-                        await _pinItemsSourcePageViewModel.DoUpdate(novelt);
-                    }
-                    
+                        int priority = item.Priority++;
+                        positionToUpdate = new Position(item.Id, item.Location, item.StatusType, priority);
+                        break;
+                    } 
+                }
+                if(!tempHa)
+                {
+                    Position temp = new Position(new Location(_currentLocation.Latitude, _currentLocation.Longitude));
+                    await _pinItemsSourcePageViewModel.DoSave(temp);
+                    map.Pins.Add(_pinItemsSourcePageViewModel.CreatePin(_currentLocation));
+                }
+                else
+                {
+                    await _pinItemsSourcePageViewModel.DoUpdate(positionToUpdate);
+                    await DisplayAlert("Info", $"{positionToUpdate.Priority.ToString()}", "Ok");
+
                 }
 
             }

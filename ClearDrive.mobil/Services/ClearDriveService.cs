@@ -12,15 +12,18 @@ using ClearDrive.mobil.Responses;
 using ClearDrive.mobil.ViewModels;
 using Microsoft.Extensions.Logging;
 using ClearDrive.mobil.Extensions;
+using ClearDrive.mobil.Views;
 
 namespace ClearDrive.mobil.Services
 {
     public class ClearDriveService : IClearDriveService
     {
         private readonly HttpClient? _httpClient;
+        private PinItemsSourcePage _pinItemsSourcePage;
 
         public ClearDriveService(IHttpClientFactory httpClientFactory)
-        {
+        {;
+            
             if (httpClientFactory != null)
             {
                 _httpClient = httpClientFactory.CreateClient("ClearDriveApi");
