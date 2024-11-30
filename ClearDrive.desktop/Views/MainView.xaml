@@ -96,6 +96,39 @@
                             <ColumnDefinition Width="20" />
                         </Grid.ColumnDefinitions>
 
+                        <Button Grid.Column="1"
+                                x:Name="home"
+                                Style="{StaticResource MenuBtnStyle}">
+
+                            <Button.Background>
+
+                                <ImageBrush ImageSource="/Images/img_todo.png"
+                                            Stretch="Uniform" />
+
+                            </Button.Background>
+
+                            <Popup Width="70"
+                                   HorizontalOffset="-12"
+                                   PlacementTarget="{Binding ElementName=todo}"
+                                   IsOpen="{Binding ElementName=todo, Path=IsMouseOver, Mode=OneWay}"
+                                   Style="{StaticResource PopupStyle}">
+
+                                <Grid>
+
+                                    <Border Style="{StaticResource border}">
+
+                                        <TextBlock Text="Todo Table"
+                                                   Style="{StaticResource PopupText}" />
+
+                                    </Border>
+
+                                    <Path Style="{StaticResource ArrowPath}" />
+
+                                </Grid>
+
+                            </Popup>
+
+                        </Button>
                         
                     </Grid>
 
