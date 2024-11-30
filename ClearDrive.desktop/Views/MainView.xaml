@@ -207,7 +207,7 @@
                     x:Name="MinimizeBtn"
                     Style="{StaticResource MinimizeBtnStyle}"
                     Click="btnMinimize_Click" />
-
+            
             <Button Margin="0,40,80,0"
                     x:Name="MaximizeBtn"
                     Style="{StaticResource MaximizeBtnStyle}"
