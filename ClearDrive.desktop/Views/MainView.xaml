@@ -32,6 +32,26 @@
                 <RowDefinition Height="70" />
             </Grid.RowDefinitions>
 
+            <TextBlock Grid.Row="0"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2"
+                       Text="C L E A R D R I V E"
+                       Foreground="#CDD7E0"
+                       FontFamily="Oswald"
+                       FontSize="36"
+                       Margin="20,50,0,0" />
+
+            <TextBlock Grid.Row="0"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2"
+                       Text="F O R   A   S A F E   J O U R N E Y"
+                       Foreground="#A6B8C8"
+                       FontFamily="Roboto"
+                       FontSize="12"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Bottom"
+                       Margin="0,0,238,23" />
+
             <Border Grid.Row="3"
                     Grid.ColumnSpan="6"
                     CornerRadius="0,0,20,20">
@@ -52,6 +72,36 @@
                 </Border.Background>
 
             </Border>
+
+            <Grid Grid.Row="2"
+                  Grid.Column="1"
+                  Grid.ColumnSpan="4">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="740" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="1"
+                        Background="#323345"
+                        CornerRadius="10,10,0,0"
+                        Margin="0,85,0,0">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="353" />
+                            <ColumnDefinition Width="353" />
+                            <ColumnDefinition Width="20" />
+                        </Grid.ColumnDefinitions>
+
+                    </Grid>
+
+                </Border>
+
+            </Grid>
+
         </Grid>
     </Grid>
 </Window>
