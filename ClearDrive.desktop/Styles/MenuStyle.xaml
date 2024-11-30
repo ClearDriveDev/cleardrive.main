@@ -136,6 +136,8 @@
                 Value="None" />
     </Style>
 
+    
+    
     <Style x:Key="UserStyle"
            TargetType="Button">
 
@@ -253,6 +255,125 @@
 
         <Setter Property="Margin"
                 Value="0,0,15,0" />
+    </Style>
+
+    
+    
+    <ImageBrush x:Key="close_def"
+                ImageSource="/Images/img_shutdown_def.png"
+                Stretch="Uniform" />
+
+    <ImageBrush x:Key="close_mo"
+                ImageSource="/Images/img_shutdown_mo.png"
+                Stretch="Uniform" />
+
+    <Style x:Key="CloseBtnStyle"
+           TargetType="{x:Type Button}">
+
+        <Setter Property="Height"
+                Value="30" />
+        <Setter Property="Width"
+                Value="30" />
+        <Setter Property="HorizontalAlignment"
+                Value="Right" />
+        <Setter Property="VerticalAlignment"
+                Value="Top" />
+        <Setter Property="Margin"
+                Value="0,40,35,0" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+
+                    <Border x:Name="border"
+                            BorderThickness="0"
+                            Background="{StaticResource close_def}" />
+
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+
+                            <Setter Property="Background"
+                                    TargetName="border"
+                                    Value="{StaticResource close_mo}" />
+
+                        </Trigger>
+
+                        <Trigger Property="IsPressed"
+                                 Value="True">
+
+                            <Setter Property="Background"
+                                    TargetName="border"
+                                    Value="{StaticResource close_mo}" />
+
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+    <ImageBrush x:Key="maximize"
+                ImageSource="/Images/img_maximize.png"
+                Stretch="Uniform" />
+
+    <Style x:Key="MaximizeBtnStyle"
+           TargetType="{x:Type Button}">
+
+        <Setter Property="Height"
+            Value="30" />
+        <Setter Property="Width"
+            Value="30" />
+        <Setter Property="HorizontalAlignment"
+            Value="Right" />
+        <Setter Property="VerticalAlignment"
+            Value="Top" />
+        <Setter Property="Margin"
+            Value="0,40,35,0" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                        BorderThickness="0"
+                        Background="{StaticResource maximize}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+    <ImageBrush x:Key="minimize"
+                ImageSource="/Images/img_minimize.png"
+                Stretch="Uniform" />
+
+    <Style x:Key="MinimizeBtnStyle"
+           TargetType="{x:Type Button}">
+
+        <Setter Property="Height"
+        Value="30" />
+        <Setter Property="Width"
+        Value="30" />
+        <Setter Property="HorizontalAlignment"
+        Value="Right" />
+        <Setter Property="VerticalAlignment"
+        Value="Top" />
+        <Setter Property="Margin"
+        Value="0,40,35,0" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                    BorderThickness="0"
+                    Background="{StaticResource minimize}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </ResourceDictionary>

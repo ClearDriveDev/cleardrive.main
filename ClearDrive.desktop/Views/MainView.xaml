@@ -168,7 +168,7 @@
               Width="50"
               HorizontalAlignment="Right"
               VerticalAlignment="Top"
-              Margin="0,30,73,0">
+              Margin="0,30,175,0">
 
             <Button x:Name="user"
                     Style="{StaticResource UserStyle}">
@@ -198,10 +198,24 @@
                         <Path Style="{StaticResource user_arrow_path}" />
 
                     </Grid>
-
                 </Popup>
-
             </Button>
+        </Grid>
+
+        <Grid>
+            <Button Margin="0,40,130,0"
+                    x:Name="MinimizeBtn"
+                    Style="{StaticResource MinimizeBtnStyle}"
+                    Click="btnMinimize_Click" />
+
+            <Button Margin="0,40,80,0"
+                    x:Name="MaximizeBtn"
+                    Style="{StaticResource MaximizeBtnStyle}"
+                    Click="btnMaximize_Click" />
+
+            <Button x:Name="ExitBtn"
+                    Style="{StaticResource CloseBtnStyle}"
+                    Click="btnClose_Click" />
 
         </Grid>
 
