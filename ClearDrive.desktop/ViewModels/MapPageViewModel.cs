@@ -101,8 +101,8 @@ public partial class MapPageViewModel : BaseViewModelWithAsyncInitialization
         {
             Width = 15,
             Height = 15,
-            Fill = Brushes.Blue,
-            Stroke = Brushes.Black,
+            Fill = System.Windows.Media.Brushes.Blue,
+            Stroke = System.Windows.Media.Brushes.Black,
             StrokeThickness = 2
         };
 
