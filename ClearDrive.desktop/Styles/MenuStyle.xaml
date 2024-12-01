@@ -257,15 +257,21 @@
                 Value="0,0,15,0" />
     </Style>
 
-    
-    
-    <ImageBrush x:Key="close_def"
-                ImageSource="/Images/img_shutdown_def.png"
-                Stretch="Uniform" />
 
-    <ImageBrush x:Key="close_mo"
-                ImageSource="/Images/img_shutdown_mo.png"
-                Stretch="Uniform" />
+
+    <ImageBrush x:Key="close_def">
+        <ImageBrush.ImageSource>
+            <BitmapImage UriSource="https://cdn-icons-png.freepik.com/512/5973/5973381.png" />
+        </ImageBrush.ImageSource>
+        <ImageBrush.Stretch>Uniform</ImageBrush.Stretch>
+    </ImageBrush>
+
+    <ImageBrush x:Key="close_mo">
+        <ImageBrush.ImageSource>
+            <BitmapImage UriSource="https://cdn-icons-png.freepik.com/512/7324/7324880.png" />
+        </ImageBrush.ImageSource>
+        <ImageBrush.Stretch>Uniform</ImageBrush.Stretch>
+    </ImageBrush>
 
     <Style x:Key="CloseBtnStyle"
            TargetType="{x:Type Button}">
@@ -316,9 +322,12 @@
 
 
 
-    <ImageBrush x:Key="maximize"
-                ImageSource="/Images/img_maximize.png"
-                Stretch="Uniform" />
+    <ImageBrush x:Key="maximize">
+        <ImageBrush.ImageSource>
+            <BitmapImage UriSource="https://cdn-icons-png.freepik.com/512/6976/6976965.png" />
+        </ImageBrush.ImageSource>
+        <ImageBrush.Stretch>Uniform</ImageBrush.Stretch>
+    </ImageBrush>
 
     <Style x:Key="MaximizeBtnStyle"
            TargetType="{x:Type Button}">
@@ -347,9 +356,12 @@
 
 
 
-    <ImageBrush x:Key="minimize"
-                ImageSource="/Images/img_minimize.png"
-                Stretch="Uniform" />
+    <ImageBrush x:Key="minimize">
+        <ImageBrush.ImageSource>
+            <BitmapImage UriSource="https://cdn-icons-png.freepik.com/512/6270/6270353.png" />
+        </ImageBrush.ImageSource>
+        <ImageBrush.Stretch>Uniform</ImageBrush.Stretch>
+    </ImageBrush>
 
     <Style x:Key="MinimizeBtnStyle"
            TargetType="{x:Type Button}">

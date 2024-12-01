@@ -52,27 +52,6 @@
                        VerticalAlignment="Bottom"
                        Margin="0,0,238,23" />
 
-            <Border Grid.Row="3"
-                    Grid.ColumnSpan="6"
-                    CornerRadius="0,0,20,20">
-
-                <Border.Background>
-
-                    <LinearGradientBrush StartPoint="0.75,0"
-                                         EndPoint="0,1">
-
-                        <GradientStop Color="GreenYellow"
-                                      Offset="0.1" />
-
-                        <GradientStop Color="Orange"
-                                      Offset="0.8" />
-
-                    </LinearGradientBrush>
-
-                </Border.Background>
-
-            </Border>
-
             <Grid Grid.Row="2"
                   Grid.Column="1"
                   Grid.ColumnSpan="4">
@@ -86,7 +65,7 @@
                 <Border Grid.Column="1"
                         Background="#221335"
                         CornerRadius="10,10,0,0"
-                        Margin="0,85,0,0">
+                        Margin="0,140,0,-55">
 
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -102,8 +81,13 @@
 
                             <Button.Background>
 
-                                <ImageBrush ImageSource="/Images/img_todo.png"
-                                            Stretch="Uniform" />
+                                <ImageBrush>
+                                    <ImageBrush.ImageSource>
+                                        <BitmapImage UriSource="https://static-00.iconduck.com/assets.00/todo-icon-2048x2048-pij2pwiy.png" />
+                                    </ImageBrush.ImageSource>
+                                    <ImageBrush.Stretch>Uniform</ImageBrush.Stretch>
+                                </ImageBrush>
+
 
                             </Button.Background>
 
@@ -134,8 +118,12 @@
 
                             <Button.Background>
 
-                                <ImageBrush ImageSource="/Images/img_map.png"
-                                            Stretch="Uniform" />
+                                <ImageBrush>
+                                    <ImageBrush.ImageSource>
+                                        <BitmapImage UriSource="https://cdn-icons-png.freepik.com/512/9865/9865562.png?ga=GA1.1.1711199087.1733073607" />
+                                    </ImageBrush.ImageSource>
+                                    <ImageBrush.Stretch>Uniform</ImageBrush.Stretch>
+                                </ImageBrush>
 
                             </Button.Background>
 
@@ -175,8 +163,12 @@
 
                 <Button.Background>
 
-                    <ImageBrush ImageSource="/Images/img_user.png"
-                                Stretch="Uniform" />
+                    <ImageBrush>
+                        <ImageBrush.ImageSource>
+                            <BitmapImage UriSource="https://cdn-icons-png.flaticon.com/512/9187/9187604.png" />
+                        </ImageBrush.ImageSource>
+                        <ImageBrush.Stretch>Uniform</ImageBrush.Stretch>
+                    </ImageBrush>
 
                 </Button.Background>
 
