@@ -8,10 +8,7 @@ namespace ClearDrive.desktop.Views
         public MainView()
         {
             InitializeComponent();
-            contentControl.Content = new DragAndDropTablePage();
-            var menu = new Menu();
-            menu.SetMainView(this); 
-            leftPanel.Content = menu; 
+
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -27,16 +24,6 @@ namespace ClearDrive.desktop.Views
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
-        }
-
-        public void ShowMap()
-        {
-            contentControl.Content = new MapPage();
-        }
-
-        public void ShowDragAndDropTable()
-        {
-            contentControl.Content = new DragAndDropTablePage();
         }
     }
 }
