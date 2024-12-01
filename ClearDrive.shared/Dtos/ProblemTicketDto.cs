@@ -1,6 +1,6 @@
 ﻿using ClearDrive.backend.Models.Datas.Enums;
 
-namespace ClearDrive.backend.Dtos
+namespace ClearDrive.shared.Dtos
 {
     public class ProblemTicketDto
     {

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ClearDrive.mobil.Models.Enums;
+﻿using ClearDrive.shared.Models.Enums;
 
-namespace ClearDrive.mobil.Dtos
+namespace ClearDrive.shared.Dtos
 {
     public class PositionDto
     {
@@ -24,13 +19,23 @@ namespace ClearDrive.mobil.Dtos
             Priority = priority;
         }
 
+        public PositionDto(double latitude, double longitude, int priority)
+        {
+            Id = Guid.NewGuid();
+            Latitude = latitude;
+            Longitude = longitude;
+            StatusType = StatusType.ToDO;
+            Priority = priority;
+        }
+
         public PositionDto()
         {
             Id = Guid.NewGuid();
-            Latitude = 0;
-            Longitude = 0;
+            Latitude = 0.0;
+            Longitude = 0.0;
             StatusType = StatusType.ToDO;
             Priority = 0;
         }
     }
+
 }

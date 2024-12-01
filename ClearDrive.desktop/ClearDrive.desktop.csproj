@@ -20,7 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
+
     <Folder Include="Images\" />
+    <ProjectReference Include="..\ClearDrive.shared\ClearDrive.shared.csproj" />
   </ItemGroup>
 
 </Project>

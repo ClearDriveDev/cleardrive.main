@@ -2,25 +2,24 @@
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using ClearDrive.desktop.Models;
 using System.Net;
 using Newtonsoft.Json;
 using System.Linq;
 using System.Diagnostics;
-using ClearDrive.desktop.Responses;
-using ClearDrive.desktop.Services;
+using ClearDrive.shared.Responses;
+using ClearDrive.shared.Models;
 
-namespace ClearDrive.desktop.Services
+namespace ClearDrive.shared.Services
 {
     public class ClearDriveService : IClearDriveService
     {
         private readonly HttpClient _httpClient;
 
-    public ClearDriveService()
+        public ClearDriveService(string url)
         {
             _httpClient = new HttpClient
             {
-                BaseAddress = new Uri("http://localhost:7090/") 
+                BaseAddress = new Uri($"{url}")
             };
         }
 
@@ -32,8 +31,8 @@ namespace ClearDrive.desktop.Services
             {
                 return result.Select(position => position).ToList();
             }
-            
-        return new List<Position>();
+
+            return new List<Position>();
         }
 
         public async Task<ControllerResponse> UpdateAsync(Position position)
@@ -106,7 +105,7 @@ namespace ClearDrive.desktop.Services
             {
                 Debug.WriteLine($"Hiba: {ex.Message}");
             }
-            
+
 
             defaultResponse.ClearAndAddError("Az adatok törlés nem lehetséges!");
             Debug.WriteLine($"{defaultResponse.ToString()}");
@@ -148,7 +147,7 @@ namespace ClearDrive.desktop.Services
             {
                 Debug.WriteLine($"Hiba: {ex.Message}");
             }
-            
+
 
             defaultResponse.ClearAndAddError("Az adatok mentése nem lehetséges!");
             Debug.WriteLine($"{defaultResponse.ToString()}");

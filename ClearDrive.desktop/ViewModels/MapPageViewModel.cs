@@ -1,21 +1,15 @@
-﻿using ClearDrive.desktop.Models;
-using ClearDrive.desktop.Services;
+﻿using ClearDrive.shared.Models;
+using ClearDrive.shared.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Threading.Tasks;
 using System.Diagnostics;
-using ClearDrive.desktop.Responses;
+using ClearDrive.shared.Responses;
 using ClearDrive.desktop.ViewModels.Base;
 using GMap.NET.WindowsPresentation;
-using System.Drawing;
 using GMap.NET;
-using System.Windows.Media;
 using System.Windows.Shapes;
-using System.Windows.Media.Imaging;
-using System.Windows.Controls;
 using SharpVectors.Converters;
-using SharpVectors.Renderers;
 
 namespace ClearDrive.desktop.ViewModels;
 
