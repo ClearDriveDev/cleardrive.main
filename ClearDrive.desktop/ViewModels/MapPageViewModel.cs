@@ -22,7 +22,7 @@ public partial class MapPageViewModel : BaseViewModelWithAsyncInitialization
 
     public MapPageViewModel()
     {
-        _clearDriveService = new ClearDriveService();
+        _clearDriveService = new ClearDriveService("http://10.0.2.2:7090/");
         
     }
 

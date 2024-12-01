@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ClearDrive.backend.Models.Datas.Entities;
-using ClearDrive.backend.Models.Datas.Enums;
+﻿using ClearDrive.shared.Models;
+using ClearDrive.shared.Models.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClearDrive.backend.Context
 {

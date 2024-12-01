@@ -1,5 +1,5 @@
-﻿using ClearDrive.backend.Models.Datas.Entities;
-using ClearDrive.backend.Models.Responses;
+﻿using ClearDrive.shared.Models;
+using ClearDrive.shared.Responses;
 
 namespace ClearDrive.backend.Repos
 {

@@ -1,4 +1,4 @@
-﻿namespace ClearDrive.backend.Models.Datas.Enums
+﻿namespace ClearDrive.shared.Models.Enums
 {
     public enum ProblemType
     {

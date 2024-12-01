@@ -1,7 +1,7 @@
 ﻿using ClearDrive.shared.Dtos;
 using ClearDrive.shared.Models;
 
-namespace ClearDrive.mobil.Extensions
+namespace ClearDrive.mobil.Converters
 {
     public static class PositionExtension
     {

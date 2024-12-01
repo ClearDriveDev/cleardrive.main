@@ -1,5 +1,4 @@
-﻿using ClearDrive.backend.Context;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace ClearDrive.backend.Context
 {

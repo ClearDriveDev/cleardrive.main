@@ -5,11 +5,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using ClearDrive.mobil.ViewModels.Base;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Threading.Tasks;
-using ClearDrive.mobil.Extensions;
 using System.Diagnostics;
 using ClearDrive.shared.Responses;
-using Microsoft.Maui.Maps;
 
 namespace ClearDrive.mobil.ViewModels
 {

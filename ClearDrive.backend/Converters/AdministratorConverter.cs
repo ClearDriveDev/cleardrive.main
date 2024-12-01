@@ -1,5 +1,6 @@
-﻿using ClearDrive.backend.Dtos;
+﻿using ClearDrive.shared.Dtos;
 using ClearDrive.backend.Models.Datas.Entities;
+
 namespace ClearDrive.backend.Converters
 {
     public static class AdministratorConverter

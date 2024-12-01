@@ -1,6 +1,6 @@
 ﻿using ClearDrive.backend.Context;
 using ClearDrive.backend.Models.Datas.Entities;
-using ClearDrive.backend.Models.Responses;
+using ClearDrive.shared.Responses;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClearDrive.backend.Repos
@@ -58,6 +58,16 @@ namespace ClearDrive.backend.Repos
                 await _dbContext.SaveChangesAsync();
             }
             return response;
+        }
+
+        Task<ControllerResponse> IAdministratorRepo.UpdateAdminAsync(Administrator administrator)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<ControllerResponse> IAdministratorRepo.DeleteAsync(Guid id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

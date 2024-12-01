@@ -1,5 +1,4 @@
-﻿using ClearDrive.desktop.Views.Content;
-using System.Windows;
+﻿using System.Windows;
 
 namespace ClearDrive.desktop.Views
 {

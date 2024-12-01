@@ -1,8 +1,6 @@
 ﻿using ClearDrive.backend.Models.Datas.Entities;
+using ClearDrive.shared.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using System.Collections.Generic;
-using System.Reflection.Emit;
 
 namespace ClearDrive.backend.Context
 {

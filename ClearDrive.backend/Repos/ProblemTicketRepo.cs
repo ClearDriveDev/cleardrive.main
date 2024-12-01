@@ -1,6 +1,6 @@
 ﻿using ClearDrive.backend.Context;
 using ClearDrive.backend.Models.Datas.Entities;
-using ClearDrive.backend.Models.Responses;
+using ClearDrive.shared.Responses;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClearDrive.backend.Repos

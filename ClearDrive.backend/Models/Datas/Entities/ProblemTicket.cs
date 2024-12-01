@@ -1,4 +1,4 @@
-﻿using ClearDrive.backend.Models.Datas.Enums;
+﻿using ClearDrive.shared.Models.Enums;
 
 namespace ClearDrive.backend.Models.Datas.Entities
 {

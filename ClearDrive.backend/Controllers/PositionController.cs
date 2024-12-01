@@ -1,9 +1,8 @@
 ﻿using ClearDrive.backend.Repos;
-using ClearDrive.backend.Converters;
-using ClearDrive.backend.Dtos;
-using ClearDrive.backend.Models.Datas.Entities;
-using ClearDrive.backend.Models.Responses;
+using ClearDrive.shared.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using ClearDrive.shared.Models;
+using ClearDrive.shared.Responses;
 
 namespace ClearDrive.backend.Controllers
 {

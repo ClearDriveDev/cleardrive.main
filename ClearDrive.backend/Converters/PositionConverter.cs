@@ -1,5 +1,5 @@
-﻿using ClearDrive.backend.Dtos;
-using ClearDrive.backend.Models.Datas.Entities;
+﻿using ClearDrive.shared.Dtos;
+using ClearDrive.shared.Models;
 
 namespace ClearDrive.backend.Converters
 {
