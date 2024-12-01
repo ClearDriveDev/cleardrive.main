@@ -1,7 +1,7 @@
 <Window x:Class="ClearDrive.desktop.Views.MainView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-         xmlns:local="clr-namespace:ClearDrive.desktop.Views"
+        xmlns:local="clr-namespace:ClearDrive.desktop.Views"
         Title="ClearDrive"
         Height="740"
         Width="1220"
@@ -12,6 +12,7 @@
         AllowsTransparency="True">
 
     <Grid>
+        <!-- Background Border -->
         <Border Background="#8C0D31"
                 CornerRadius="25" />
 
@@ -32,6 +33,7 @@
                 <RowDefinition Height="70" />
             </Grid.RowDefinitions>
 
+            <!-- Title and Subtitle -->
             <TextBlock Grid.Row="0"
                        Grid.Column="1"
                        Grid.ColumnSpan="2"
@@ -52,10 +54,10 @@
                        VerticalAlignment="Bottom"
                        Margin="0,0,238,23" />
 
+            <!-- Menu Buttons -->
             <Grid Grid.Row="2"
                   Grid.Column="1"
                   Grid.ColumnSpan="4">
-
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="740" />
@@ -75,125 +77,52 @@
                             <ColumnDefinition Width="20" />
                         </Grid.ColumnDefinitions>
 
+                        <!-- Todo Button -->
                         <Button Grid.Column="1"
                                 x:Name="todo"
-                                Style="{StaticResource MenuBtnStyle}">
-
+                                Style="{StaticResource MenuBtnStyle}"
+                                Click="OnTodoButtonClick">
                             <Button.Background>
-
                                 <ImageBrush>
                                     <ImageBrush.ImageSource>
                                         <BitmapImage UriSource="https://static-00.iconduck.com/assets.00/todo-icon-2048x2048-pij2pwiy.png" />
                                     </ImageBrush.ImageSource>
                                     <ImageBrush.Stretch>Uniform</ImageBrush.Stretch>
                                 </ImageBrush>
-
-
                             </Button.Background>
-
-                            <Popup Width="70"
-                                   HorizontalOffset="-12"
-                                   PlacementTarget="{Binding ElementName=todo}"
-                                   IsOpen="{Binding ElementName=todo, Path=IsMouseOver, Mode=OneWay}"
-                                   Style="{StaticResource PopupStyle}">
-
-                                <Grid>
-
-                                    <Border Style="{StaticResource border}">
-
-                                        <TextBlock Text="Todo Table"
-                                                   Style="{StaticResource PopupText}" />
-
-                                    </Border>
-
-                                    <Path Style="{StaticResource ArrowPath}" />
-
-                                </Grid>
-                            </Popup>
                         </Button>
 
+                        <!-- Map Button -->
                         <Button Grid.Column="2"
                                 x:Name="map"
-                                Style="{StaticResource MenuBtnStyle}">
-
+                                Style="{StaticResource MenuBtnStyle}"
+                                Click="OnMapButtonClick">
                             <Button.Background>
-
                                 <ImageBrush>
                                     <ImageBrush.ImageSource>
                                         <BitmapImage UriSource="https://cdn-icons-png.freepik.com/512/9865/9865562.png?ga=GA1.1.1711199087.1733073607" />
                                     </ImageBrush.ImageSource>
                                     <ImageBrush.Stretch>Uniform</ImageBrush.Stretch>
                                 </ImageBrush>
-
                             </Button.Background>
-
-                            <Popup Width="70"
-                                   HorizontalOffset="-12"
-                                   PlacementTarget="{Binding ElementName=map}"
-                                   IsOpen="{Binding ElementName=map, Path=IsMouseOver, Mode=OneWay}"
-                                   Style="{StaticResource PopupStyle}">
-
-                                <Grid>
-
-                                    <Border Style="{StaticResource border}">
-
-                                        <TextBlock Text="Map"
-                                                    Style="{StaticResource PopupText}" />
-
-                                    </Border>
-
-                                    <Path Style="{StaticResource ArrowPath}" />
-
-                                </Grid>
-                            </Popup>
                         </Button>
                     </Grid>
                 </Border>
             </Grid>
         </Grid>
 
-        <Grid Height="50"
-              Width="50"
-              HorizontalAlignment="Right"
-              VerticalAlignment="Top"
-              Margin="0,30,175,0">
+        <!-- ContentControl in the center for dynamic content -->
+        <ContentControl Grid.Row="1"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="4"
+                        Content="{Binding CurrentView}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Width="900"
+                        Height="500">
+        </ContentControl>
 
-            <Button x:Name="user"
-                    Style="{StaticResource UserStyle}">
-
-                <Button.Background>
-
-                    <ImageBrush>
-                        <ImageBrush.ImageSource>
-                            <BitmapImage UriSource="https://cdn-icons-png.flaticon.com/512/9187/9187604.png" />
-                        </ImageBrush.ImageSource>
-                        <ImageBrush.Stretch>Uniform</ImageBrush.Stretch>
-                    </ImageBrush>
-
-                </Button.Background>
-
-                <Popup Width="137"
-                       HorizontalOffset="-93"
-                       PlacementTarget="{Binding ElementName=user}"
-                       IsOpen="{Binding ElementName=user, Path=IsMouseOver, Mode=OneWay}"
-                       Style="{StaticResource user_popup}">
-
-                    <Grid>
-
-                        <Border Style="{StaticResource user_border}">
-
-                            <TextBlock Text="Arun Mutharasu"
-                                       Style="{StaticResource PopupText}" />
-
-                        </Border>
-
-                        <Path Style="{StaticResource user_arrow_path}" />
-
-                    </Grid>
-                </Popup>
-            </Button>
-        </Grid>
-
+        <!-- Header & Navigation buttons -->
         <Grid>
             <Button Margin="0,40,130,0"
                     x:Name="MinimizeBtn"
