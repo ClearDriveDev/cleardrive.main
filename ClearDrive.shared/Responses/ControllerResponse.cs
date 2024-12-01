@@ -1,4 +1,4 @@
-﻿namespace ClearDrive.mobil.Responses
+﻿namespace ClearDrive.shared.Responses
 {
     public class ControllerResponse : ErrorStore
     {

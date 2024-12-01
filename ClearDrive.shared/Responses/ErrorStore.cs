@@ -1,4 +1,4 @@
-﻿namespace ClearDrive.desktop.Responses
+﻿namespace ClearDrive.shared.Responses
 {
     public class ErrorStore
     {

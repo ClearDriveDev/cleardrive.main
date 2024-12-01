@@ -1,5 +1,5 @@
-﻿using ClearDrive.mobil.Dtos;
-using ClearDrive.mobil.Models;
+﻿using ClearDrive.shared.Dtos;
+using ClearDrive.shared.Models;
 
 namespace ClearDrive.mobil.Extensions
 {
@@ -10,10 +10,10 @@ namespace ClearDrive.mobil.Extensions
             return new PositionDto
             {
                 Id = position.Id,
-                Latitude = position.Location.Latitude,
-                Longitude = position.Location.Longitude,
+                Latitude = position.Latitude,
+                Longitude = position.Longitude,
                 StatusType = position.StatusType,
-                Priority = position.Priority,
+                Priority = position.Priority
             };
         }
 
@@ -22,7 +22,8 @@ namespace ClearDrive.mobil.Extensions
             return new Position
             {
                 Id = positionDto.Id,
-                Location = new Location(positionDto.Latitude, positionDto.Longitude),
+                Latitude = positionDto.Latitude,
+                Longitude = positionDto.Longitude,
                 StatusType = positionDto.StatusType,
                 Priority = positionDto.Priority
             };

@@ -9,8 +9,6 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <local:LeftPanel x:Name="leftPanel" Grid.Column="0"></local:LeftPanel>
-
         <Border CornerRadius="0,10,10,0" Grid.Column="1">
             <Grid>
                 <Grid.RowDefinitions>

@@ -1,4 +1,4 @@
-﻿namespace ClearDrive.mobil.Models.Enums
+﻿namespace ClearDrive.shared.Models.Enums
 {
     public enum StatusType
     {

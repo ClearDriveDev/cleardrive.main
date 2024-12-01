@@ -3,8 +3,6 @@ using GMap.NET;
 using System.Windows;
 using GMap.NET.WindowsPresentation;
 using ClearDrive.desktop.ViewModels;
-using System.Windows.Media;
-using System.Windows.Shapes;
 using System.Windows.Controls;
 
 namespace ClearDrive.desktop.Views.Content

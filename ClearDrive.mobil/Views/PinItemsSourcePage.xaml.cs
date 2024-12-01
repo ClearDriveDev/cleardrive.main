@@ -1,7 +1,7 @@
 ﻿using ClearDrive.mobil.ViewModels;
 using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
-using ClearDrive.mobil.Models;
+using ClearDrive.shared.Models;
 using System.Diagnostics;
 
 namespace ClearDrive.mobil.Views
@@ -41,12 +41,11 @@ namespace ClearDrive.mobil.Views
         private Location deviceLocation;
         private int clicked = 0;
 
-        public PinItemsSourcePage(PinItemsSourcePageViewModel viewModel)
+        public PinItemsSourcePage()
         {
             InitializeComponent();
-            BindingContext = viewModel;
-            _pinItemsSourcePageViewModel = viewModel;
-
+            _pinItemsSourcePageViewModel = new PinItemsSourcePageViewModel();
+            BindingContext = _pinItemsSourcePageViewModel;
 
             map.IsShowingUser = true;
             map.IsScrollEnabled = true;
@@ -59,7 +58,7 @@ namespace ClearDrive.mobil.Views
             await _pinItemsSourcePageViewModel.InitializeAsync();
             foreach (var item in _pinItemsSourcePageViewModel.Locations)
             {
-                map.Pins.Add(_pinItemsSourcePageViewModel.CreatePin(item.Location));
+                map.Pins.Add(_pinItemsSourcePageViewModel.CreatePin(new Location(item.Latitude, item.Longitude)));
             }
 
         }
@@ -93,17 +92,17 @@ namespace ClearDrive.mobil.Views
                 
                 foreach (Position item in _pinItemsSourcePageViewModel.Locations)
                 {
-                    tempHa = _pinItemsSourcePageViewModel.GetDistance(_currentLocation, item.Location);
+                    tempHa = _pinItemsSourcePageViewModel.GetDistance(_currentLocation, new Location(item.Latitude, item.Longitude));
                     if (tempHa) 
                     {
                         int priority = item.Priority++;
-                        positionToUpdate = new Position(item.Id, item.Location, item.StatusType, priority);
+                        positionToUpdate = new Position(item.Id, item.Latitude, item.Longitude, item.StatusType, priority);
                         break;
                     } 
                 }
                 if(!tempHa)
                 {
-                    Position temp = new Position(new Location(_currentLocation.Latitude, _currentLocation.Longitude));
+                    Position temp = new Position(_currentLocation.Latitude, _currentLocation.Longitude);
                     await _pinItemsSourcePageViewModel.DoSave(temp);
                     map.Pins.Add(_pinItemsSourcePageViewModel.CreatePin(_currentLocation));
                 }
@@ -154,7 +153,7 @@ namespace ClearDrive.mobil.Views
             await getCurrentLocation();
             if (deviceLocation != null)
             {
-                await _pinItemsSourcePageViewModel.DoSave(new Position(deviceLocation));
+                await _pinItemsSourcePageViewModel.DoSave(new Position(deviceLocation.Latitude, deviceLocation.Longitude));
                 //map.Pins.Add(_pinItemsSourcePageViewModel.CreatePin(deviceLocation));
             }
         }

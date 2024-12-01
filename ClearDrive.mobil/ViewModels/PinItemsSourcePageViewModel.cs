@@ -1,6 +1,6 @@
-﻿using ClearDrive.mobil.Models;
+﻿using ClearDrive.shared.Models;
 using Microsoft.Maui.Controls.Maps;
-using ClearDrive.mobil.Services;
+using ClearDrive.shared.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using ClearDrive.mobil.ViewModels.Base;
 using System.Collections.ObjectModel;
@@ -8,7 +8,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Threading.Tasks;
 using ClearDrive.mobil.Extensions;
 using System.Diagnostics;
-using ClearDrive.mobil.Responses;
+using ClearDrive.shared.Responses;
 using Microsoft.Maui.Maps;
 
 namespace ClearDrive.mobil.ViewModels
@@ -20,9 +20,9 @@ namespace ClearDrive.mobil.ViewModels
         [ObservableProperty]
         private ObservableCollection<Position> _locations = new();
 
-        public PinItemsSourcePageViewModel(IClearDriveService? clearDriveService)
+        public PinItemsSourcePageViewModel()
         {
-            _clearDriveService = clearDriveService;
+            _clearDriveService = new ClearDriveService("http://10.0.2.2:7090/");
 
         }
 
@@ -129,7 +129,7 @@ namespace ClearDrive.mobil.ViewModels
                     Math.Cos(location1.Latitude * Math.PI / 180) * Math.Cos(location2.Latitude * Math.PI / 180) *
                     Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
             var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
-            var distance = R * c * 1000; // Distance in meters
+            var distance = R * c * 1000;
             return distance<=10 ? true : false;
         }
     }
