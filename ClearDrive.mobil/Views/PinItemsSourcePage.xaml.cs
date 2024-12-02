@@ -41,11 +41,11 @@ namespace ClearDrive.mobil.Views
         private Location deviceLocation;
         private int clicked = 0;
 
-        public PinItemsSourcePage()
+        public PinItemsSourcePage(PinItemsSourcePageViewModel viewModel)
         {
             InitializeComponent();
-            _pinItemsSourcePageViewModel = new PinItemsSourcePageViewModel();
-            BindingContext = _pinItemsSourcePageViewModel;
+            BindingContext = viewModel;
+            _pinItemsSourcePageViewModel = viewModel;
 
             map.IsShowingUser = true;
             map.IsScrollEnabled = true;

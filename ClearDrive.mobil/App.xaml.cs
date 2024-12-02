@@ -1,13 +1,14 @@
 ﻿using ClearDrive.mobil.Views;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ClearDrive.mobil
 {
     public partial class App : Application
     {
-        public App()
+        public App(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            MainPage = new PinItemsSourcePage();
+            MainPage = serviceProvider.GetRequiredService<PinItemsSourcePage>();
         }
     }
 }

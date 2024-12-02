@@ -17,9 +17,9 @@ namespace ClearDrive.mobil.ViewModels
         [ObservableProperty]
         private ObservableCollection<Position> _locations = new();
 
-        public PinItemsSourcePageViewModel()
+        public PinItemsSourcePageViewModel(IClearDriveService? clearDriveService)
         {
-            _clearDriveService = new ClearDriveService("http://10.0.2.2:7090/");
+            _clearDriveService = clearDriveService;
 
         }
 

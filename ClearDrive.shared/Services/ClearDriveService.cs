@@ -13,15 +13,22 @@ namespace ClearDrive.shared.Services
 {
     public class ClearDriveService : IClearDriveService
     {
-        private readonly HttpClient _httpClient;
+        private readonly HttpClient? _httpClient;
 
-        public ClearDriveService(string url)
+        public ClearDriveService(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = new HttpClient
+            ;
+
+            if (httpClientFactory != null)
             {
-                BaseAddress = new Uri($"{url}")
-            };
+                _httpClient = httpClientFactory.CreateClient("ClearDriveApi");
+            }
+            else
+            {
+                Debug.WriteLine("A HttpClientFactory null.");
+            }
         }
+
 
         public async Task<List<Position>> SelectAll()
         {
