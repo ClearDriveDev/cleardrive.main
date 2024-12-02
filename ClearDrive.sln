@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearDrive.shared", "ClearD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearDrive.mobil", "ClearDrive.mobil\ClearDrive.mobil.csproj", "{3EE91830-4BC4-480B-AEC1-DB79609B74A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearDrive.web", "ClearDrive.web\ClearDrive.web\ClearDrive.web.csproj", "{174F4446-487D-4FDB-BDBA-61AD1EF9CE0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearDrive.web.Client", "ClearDrive.web\ClearDrive.web.Client\ClearDrive.web.Client.csproj", "{C3770035-4324-4638-8AC7-89B80B8F405B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +39,14 @@ Global
 		{3EE91830-4BC4-480B-AEC1-DB79609B74A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EE91830-4BC4-480B-AEC1-DB79609B74A4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3EE91830-4BC4-480B-AEC1-DB79609B74A4}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{174F4446-487D-4FDB-BDBA-61AD1EF9CE0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{174F4446-487D-4FDB-BDBA-61AD1EF9CE0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{174F4446-487D-4FDB-BDBA-61AD1EF9CE0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{174F4446-487D-4FDB-BDBA-61AD1EF9CE0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3770035-4324-4638-8AC7-89B80B8F405B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3770035-4324-4638-8AC7-89B80B8F405B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3770035-4324-4638-8AC7-89B80B8F405B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3770035-4324-4638-8AC7-89B80B8F405B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
