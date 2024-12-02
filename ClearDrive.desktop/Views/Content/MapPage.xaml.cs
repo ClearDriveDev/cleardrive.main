@@ -10,7 +10,7 @@ namespace ClearDrive.desktop.Views.Content
     public partial class MapPage : UserControl
     {
         private MapPageViewModel _mapPageViewModel;
-        private bool _isDataLoaded = false;  // Flag, hogy ellenőrizzük, hogy az adatok már betöltődtek
+        private bool _isDataLoaded = false;
 
         public MapPage(MapPageViewModel viewModel)
         {
@@ -28,7 +28,7 @@ namespace ClearDrive.desktop.Views.Content
 
         public async Task LoadData()
         {
-            if (_isDataLoaded) return;  // Ha az adatok már betöltődtek, ne töltsük újra
+            if (_isDataLoaded) return;
 
             PointLatLng point = new PointLatLng(46.25312, 20.143497);
             GMapControl.Markers.Add(_mapPageViewModel.CreateMarker(point));
@@ -42,7 +42,7 @@ namespace ClearDrive.desktop.Views.Content
                 GMapControl.Markers.Add(_mapPageViewModel.CreatePin(temp));
             }
 
-            _isDataLoaded = true;  // Beállítjuk, hogy az adatok már betöltődtek
+            _isDataLoaded = true;
         }
 
         private void ZoomIn_Click(object sender, RoutedEventArgs e)

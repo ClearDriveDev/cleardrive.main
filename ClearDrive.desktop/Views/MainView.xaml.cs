@@ -6,9 +6,9 @@ namespace ClearDrive.desktop.Views
 {
     public partial class MainView : Window
     {
-        private readonly IServiceProvider _serviceProvider;
-        private MapPage _mapPage;
-        private DragAndDropTablePage _dragAndDropTablePage;
+        private readonly IServiceProvider? _serviceProvider;
+        private MapPage? _mapPage;
+        private DragAndDropTablePage? _dragAndDropTablePage;
 
         public object CurrentView
         {
@@ -23,7 +23,7 @@ namespace ClearDrive.desktop.Views
         {
             InitializeComponent();
             DataContext = this;
-            _serviceProvider = serviceProvider;  // DI konténer tárolása
+            _serviceProvider = serviceProvider; 
         }
 
         public MainView() { }
@@ -33,7 +33,7 @@ namespace ClearDrive.desktop.Views
             if (_dragAndDropTablePage == null)
             {
                 _dragAndDropTablePage = _serviceProvider.GetRequiredService<DragAndDropTablePage>();
-                await _dragAndDropTablePage.LoadData();  // Első alkalommal töltjük le az adatokat
+                await _dragAndDropTablePage.LoadData();  
             }
 
             CurrentView = _dragAndDropTablePage;
@@ -44,7 +44,7 @@ namespace ClearDrive.desktop.Views
             if (_mapPage == null)
             {
                 _mapPage = _serviceProvider.GetRequiredService<MapPage>();
-                await _mapPage.LoadData();  // Első alkalommal töltjük le az adatokat
+                await _mapPage.LoadData();
             }
 
             CurrentView = _mapPage;

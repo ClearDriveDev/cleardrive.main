@@ -16,7 +16,7 @@ namespace ClearDrive.desktop.Views.Content
         private ObservableCollection<Position> DoneItems = new();
 
         private bool _isDataLoaded = false;
-        private bool _isDragging = false;// Flag, hogy ellenőrizzük, hogy az adatok már betöltődtek.
+        private bool _isDragging = false;
 
         public DragAndDropTablePage(DragAndDropTableViewModel viewModel)
         {
@@ -27,7 +27,7 @@ namespace ClearDrive.desktop.Views.Content
 
         public async Task LoadData()
         {
-            if (_isDataLoaded) return;  // Ha már betöltődtek az adatok, ne töltsük újra
+            if (_isDataLoaded) return;
 
             await _dragAndDropTableViewModel.UpdateView();
             foreach (var item in _dragAndDropTableViewModel.Locations)
@@ -46,7 +46,7 @@ namespace ClearDrive.desktop.Views.Content
                 }
             }
 
-            _isDataLoaded = true;  // Beállítjuk, hogy az adatok már betöltődtek
+            _isDataLoaded = true;
         }
 
         public void UpdateTable()

@@ -34,8 +34,6 @@ namespace ClearDrive.mobil.Views
             }
         }
 
-
-
         private PinItemsSourcePageViewModel _pinItemsSourcePageViewModel;
         private Location _currentLocation;
         private Location deviceLocation;
@@ -60,7 +58,6 @@ namespace ClearDrive.mobil.Views
             {
                 map.Pins.Add(_pinItemsSourcePageViewModel.CreatePin(new Location(item.Latitude, item.Longitude)));
             }
-
         }
         private void OnMapClicked(object sender, MapClickedEventArgs e)
         {
