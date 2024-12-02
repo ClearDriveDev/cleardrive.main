@@ -1,12 +1,15 @@
 ﻿using System.Windows;
-using ClearDrive.desktop.Views;
 using ClearDrive.desktop.Views.Content;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ClearDrive.desktop.Views
 {
-
     public partial class MainView : Window
     {
+        private readonly IServiceProvider _serviceProvider;
+        private MapPage _mapPage;
+        private DragAndDropTablePage _dragAndDropTablePage;
+
         public object CurrentView
         {
             get { return (object)GetValue(CurrentViewProperty); }
@@ -16,25 +19,40 @@ namespace ClearDrive.desktop.Views
         public static readonly DependencyProperty CurrentViewProperty =
             DependencyProperty.Register("CurrentView", typeof(object), typeof(MainView), new PropertyMetadata(null));
 
-        public MainView()
+        public MainView(IServiceProvider serviceProvider)
         {
             InitializeComponent();
             DataContext = this;
+            _serviceProvider = serviceProvider;  // DI konténer tárolása
         }
 
-        private void OnTodoButtonClick(object sender, RoutedEventArgs e)
+        public MainView() { }
+
+        private async void OnTodoButtonClick(object sender, RoutedEventArgs e)
         {
-            CurrentView = new DragAndDropTablePage(); 
+            if (_dragAndDropTablePage == null)
+            {
+                _dragAndDropTablePage = _serviceProvider.GetRequiredService<DragAndDropTablePage>();
+                await _dragAndDropTablePage.LoadData();  // Első alkalommal töltjük le az adatokat
+            }
+
+            CurrentView = _dragAndDropTablePage;
         }
 
-        private void OnMapButtonClick(object sender, RoutedEventArgs e)
+        private async void OnMapButtonClick(object sender, RoutedEventArgs e)
         {
-            CurrentView = new MapPage(); 
+            if (_mapPage == null)
+            {
+                _mapPage = _serviceProvider.GetRequiredService<MapPage>();
+                await _mapPage.LoadData();  // Első alkalommal töltjük le az adatokat
+            }
+
+            CurrentView = _mapPage;
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Application.Current.Shutdown();
         }
 
         private void btnMaximize_Click(object sender, RoutedEventArgs e)

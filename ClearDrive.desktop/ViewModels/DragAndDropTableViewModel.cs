@@ -16,9 +16,9 @@ public partial class DragAndDropTableViewModel : BaseViewModelWithAsyncInitializ
     [ObservableProperty]
     private ObservableCollection<Position> _locations = new();
 
-    public DragAndDropTableViewModel()
+    public DragAndDropTableViewModel(IClearDriveService? clearDriveService)
     {
-        _clearDriveService = new ClearDriveService("http://localhost:7090/");
+        _clearDriveService = clearDriveService;
 
     }
 

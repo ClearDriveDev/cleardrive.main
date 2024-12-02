@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:ClearDrive.desktop.Views.Content"
              xmlns:maps="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
              mc:Ignorable="d" 
-             Loaded="Window_Loaded"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <maps:GMapControl Name="GMapControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />

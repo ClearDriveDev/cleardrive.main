@@ -11,22 +11,24 @@ namespace ClearDrive.desktop.Views.Content
     public partial class DragAndDropTablePage : UserControl
     {
         private DragAndDropTableViewModel _dragAndDropTableViewModel;
-
         private ObservableCollection<Position> ToDoItems = new();
         private ObservableCollection<Position> InProgressItems = new();
         private ObservableCollection<Position> DoneItems = new();
 
-        private bool _isDragging = false;
+        private bool _isDataLoaded = false;
+        private bool _isDragging = false;// Flag, hogy ellenőrizzük, hogy az adatok már betöltődtek.
 
-        public DragAndDropTablePage()
+        public DragAndDropTablePage(DragAndDropTableViewModel viewModel)
         {
             InitializeComponent();
-            _dragAndDropTableViewModel = new DragAndDropTableViewModel();
-            DataContext = _dragAndDropTableViewModel;
+            _dragAndDropTableViewModel = viewModel;
+            DataContext = viewModel;
         }
 
-        private async Task LoadData()
+        public async Task LoadData()
         {
+            if (_isDataLoaded) return;  // Ha már betöltődtek az adatok, ne töltsük újra
+
             await _dragAndDropTableViewModel.UpdateView();
             foreach (var item in _dragAndDropTableViewModel.Locations)
             {
@@ -43,6 +45,8 @@ namespace ClearDrive.desktop.Views.Content
                     DoneItems.Add(item);
                 }
             }
+
+            _isDataLoaded = true;  // Beállítjuk, hogy az adatok már betöltődtek
         }
 
         public void UpdateTable()
@@ -50,6 +54,13 @@ namespace ClearDrive.desktop.Views.Content
             ToDoListView.ItemsSource = ToDoItems;
             InProgressListView.ItemsSource = InProgressItems;
             DoneListView.ItemsSource = DoneItems;
+        }
+
+        private async void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            await _dragAndDropTableViewModel.InitializeAsync();
+            await LoadData();
+            UpdateTable();
         }
 
         private void ListView_PreviewDragOver(object sender, DragEventArgs e)
@@ -162,13 +173,6 @@ namespace ClearDrive.desktop.Views.Content
                 element = VisualTreeHelper.GetParent(element);
             }
             return element as ListViewItem;
-        }
-
-        private async void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            await _dragAndDropTableViewModel.InitializeAsync();
-            await LoadData();
-            UpdateTable();
         }
     }
 }

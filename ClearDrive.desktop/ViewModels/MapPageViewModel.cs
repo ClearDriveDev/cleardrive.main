@@ -20,10 +20,10 @@ public partial class MapPageViewModel : BaseViewModelWithAsyncInitialization
     [ObservableProperty]
     private ObservableCollection<Position> _locations = new();
 
-    public MapPageViewModel()
+    public MapPageViewModel(IClearDriveService? clearDriveService)
     {
-        _clearDriveService = new ClearDriveService("http://localhost:7090/");
-        
+        _clearDriveService = clearDriveService;
+
     }
 
     [RelayCommand]
